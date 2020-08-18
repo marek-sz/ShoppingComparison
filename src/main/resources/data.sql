@@ -1,0 +1,13 @@
+INSERT INTO product (brand, model, price) VALUES ('Adidas', 'Gazelle', 300)
+INSERT INTO product (brand, model, price) VALUES ('Adidas', 'Gazelle', 298)
+INSERT INTO product (brand, model, price) VALUES ('Adidas', 'Gazelle', 313)
+INSERT INTO product (brand, model, price) VALUES ('Adidas', 'ZX', 399)
+INSERT INTO product (brand, model, price) VALUES ('Adidas', 'ZX', 379)
+INSERT INTO product (brand, model, price) VALUES ('Adidas', 'ZX', 339)
+INSERT INTO product (brand, model, price) VALUES ('Clarks', 'Curlington Rise', 699)
+INSERT INTO product (brand, model, price) VALUES ('Clarks', 'Oliver Top', 499)
+INSERT INTO product (brand, model, price) VALUES ('Clarks', 'Clarkdale Gobi', 1425)
+INSERT INTO product (brand, model, price) VALUES ('Adidas', 'Superstar', 399)
+INSERT INTO product (brand, model, price) VALUES ('Adidas', 'Superstar', 369)
+INSERT INTO product (brand, model, price) VALUES ('Adidas', 'Superstar', 425)
+

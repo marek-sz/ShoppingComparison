@@ -1,0 +1,151 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Shopping comparison</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="shop, shopping, comparison">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/fontello.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
+
+</head>
+
+<body>
+<header class="mb-2">
+    <nav class="navbar navbar-light bg-light">
+        <form action="/products" method="GET" class="form-inline">
+            <a class="navbar-brand" href="/allProducts"><h1>Lorem</h1></a>
+            <input class="form-control mr-2" type="search" name="productName" placeholder="Szukaj" aria-label="Search">
+            <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Szukaj</button>
+        </form>
+    </nav>
+</header>
+
+<main>
+    <div class="container my-3">
+        <div class="row">
+            <nav class="col-lg-3 pr-5 mb-5">
+                <h3 class="pl-2">Kategorie</h3>
+                <ul class="list-group-flush p-0">
+                    <a href="#" class="list-group-item list-group-item-action list-group-item-light px-2">Akcesoria
+                        damskie</a>
+                    <a href="#" class="list-group-item list-group-item-action list-group-item-light px-2">Bielizna
+                        damska</a>
+                    <a href="#" class="list-group-item list-group-item-action list-group-item-light px-2">Bluzki
+                        damskie</a>
+                    <a href="#" th:href="@{/allProducts}" class="list-group-item list-group-item-action list-group-item-light px-2">Buty
+                        damskie</a>
+                    <a href="#" class="list-group-item list-group-item-action list-group-item-light px-2">Jeansy
+                        damskie</a>
+                    <a href="#"
+                       class="list-group-item list-group-item-action list-group-item-light px-2">Kombinezony</a>
+                    <a href="#" class="list-group-item list-group-item-action list-group-item-light px-2">Koszule
+                        damskie</a>
+                    <a href="#" class="list-group-item list-group-item-action list-group-item-light px-2">Kurtki i
+                        płaszcze damskie</a>
+                    <a href="#"
+                       class="list-group-item list-group-item-action list-group-item-light px-2">Legginsy</a>
+                    <a href="#" class="list-group-item list-group-item-action list-group-item-light px-2">Marynarki
+                        i
+                        żakiety</a>
+                    <a href="#" class="list-group-item list-group-item-action list-group-item-light px-2">Spodenki
+                        damskie</a>
+                    <a href="#" class="list-group-item list-group-item-action list-group-item-light px-2">Spodnie
+                        damskie</a>
+                    <a href="#" class="list-group-item list-group-item-action list-group-item-light px-2">Torebki
+                        damskie</a>
+                </ul>
+            </nav>
+            <div class="col-lg-9 pl-1">
+                <h3>Wyniki wyszukiwania</h3>
+
+                <div>
+                    <table class="table table-hover bg-light mb-4">
+                        <thead>
+                        <tr>
+                            <th><a href="/allProducts/byName">Nazwa produktu</a></th>
+                            <th><a href="/allProducts/byPrice">Cena</a></th>
+                            <th><a href="/allProducts/byShop">Sklep</a></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="product: ${products}">
+                            <td th:text="${product.brand + ' ' + product.model}"/>
+                            <td th:text="${product.price}"/>
+                            <td><a href="#" target="_blank" th:href="${product.url}">Do sklepu</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu feugiat nisi. Class aptent
+                    taciti
+                    sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Maecenas convallis dapibus
+                    nunc.
+                    Cras
+                    libero neque, feugiat eget mi vel, consequat mollis tortor. Integer non mi iaculis, ultricies justo
+                    a,
+                    vulputate
+                    ex. Sed arcu felis, facilisis ut odio sit amet, aliquet hendrerit purus. Donec in dui non mi
+                    hendrerit
+                    efficitur. Fusce sit amet neque id dui malesuada varius.</p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="page-footer p-5">
+    <div class="socials">
+        <ul class="list-unstyled list-inline text-center">
+            <li class="list-inline-item">
+                <a class="btn-floating btn-mail mx-1" href="mailto:marekszymkowiak1@gmail.com">
+                    <i class="icon-mail"> </i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="btn-floating btn-gh mx-1" href="https://www.github.com/" target="_blank">
+                    <i class="icon-github-circled"> </i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="btn-floating btn-fb mx-1" href="https://www.facebook.com/" target="_blank">
+                    <i class="icon-facebook-squared"> </i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="btn-floating btn-li mx-1" href="https://www.linkedin.com/" target="_blank">
+                    <i class="icon-linkedin-squared"> </i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="btn-floating btn-insta mx-1" href="https://www.instagram.com/" target="_blank">
+                    <i class="icon-instagram"> </i>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    2020 © Copyright: <a href="mailto:marekszymkowiak1@gmail.com">Marek Szymkowiak</a>
+
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+</body>
+</html>

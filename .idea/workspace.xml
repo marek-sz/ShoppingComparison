@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="47ca9193-f455-47a8-aa5e-9ac3e75bdda4" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="XSLT Stylesheet" />
+        <option value="Thymeleaf" />
+        <option value="CSS File" />
+        <option value="HTML File" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1di6QTPYXjxWEtJZXbVPWwWp9nt" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showVisibilityIcons" value="true" />
+    <option name="sortByType" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="J:/PROGRAMOWANIE/PROGRAMATOR/PROGRAMATOR ZAJECIA/!PROJECTS/thymeleafexamples-petclinic-2.1-master/pom.xml" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.example.comparisonshoppingengine.controller" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="J:\PROGRAMOWANIE\PROGRAMATOR\PROGRAMATOR ZAJECIA\!PROJECTS\comparison-shopping-engine\src\main\resources" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="ShoppingComparison" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="shopping-comparison" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.shoppingcomparison.ShoppingComparison" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="47ca9193-f455-47a8-aa5e-9ac3e75bdda4" name="Default Changelist" comment="" />
+      <created>1592895550280</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1592895550280</updated>
+      <workItem from="1592895553426" duration="21296000" />
+      <workItem from="1593003439566" duration="1911000" />
+      <workItem from="1593011274855" duration="763000" />
+      <workItem from="1593072033531" duration="82000" />
+      <workItem from="1593072322580" duration="138000" />
+      <workItem from="1593072476946" duration="6988000" />
+      <workItem from="1593157534177" duration="3263000" />
+      <workItem from="1593172391911" duration="4623000" />
+      <workItem from="1593414733703" duration="3455000" />
+      <workItem from="1593506678287" duration="1383000" />
+      <workItem from="1593512573165" duration="7873000" />
+      <workItem from="1593590160788" duration="9693000" />
+      <workItem from="1593602008427" duration="602000" />
+      <workItem from="1593675991451" duration="10437000" />
+      <workItem from="1593762445259" duration="1242000" />
+      <workItem from="1593860171107" duration="22000" />
+      <workItem from="1593862143039" duration="45000" />
+      <workItem from="1593862208274" duration="11216000" />
+      <workItem from="1593942649180" duration="1984000" />
+      <workItem from="1594037012437" duration="3916000" />
+      <workItem from="1594121820848" duration="1205000" />
+      <workItem from="1594125563634" duration="13183000" />
+      <workItem from="1594209550277" duration="10795000" />
+      <workItem from="1594292359071" duration="4780000" />
+      <workItem from="1594380638883" duration="10206000" />
+      <workItem from="1594398675242" duration="5168000" />
+      <workItem from="1595231742265" duration="103000" />
+      <workItem from="1595606220345" duration="2647000" />
+      <workItem from="1595668068434" duration="18188000" />
+      <workItem from="1595842102687" duration="12849000" />
+      <workItem from="1595919126007" duration="16332000" />
+      <workItem from="1596019805090" duration="660000" />
+      <workItem from="1596094469321" duration="16658000" />
+      <workItem from="1596182952778" duration="932000" />
+      <workItem from="1596189677781" duration="7088000" />
+      <workItem from="1596276217553" duration="11716000" />
+      <workItem from="1596439589260" duration="14957000" />
+      <workItem from="1596526617744" duration="7424000" />
+      <workItem from="1596614388211" duration="1801000" />
+      <workItem from="1596624835149" duration="4270000" />
+      <workItem from="1596723681343" duration="1131000" />
+      <workItem from="1596786222754" duration="2391000" />
+      <workItem from="1596806444068" duration="4143000" />
+      <workItem from="1597138125856" duration="13289000" />
+      <workItem from="1597160464251" duration="1692000" />
+      <workItem from="1597219635062" duration="7051000" />
+      <workItem from="1597303634389" duration="17810000" />
+      <workItem from="1597385075487" duration="2270000" />
+      <workItem from="1597646839305" duration="3041000" />
+      <workItem from="1597650210093" duration="21188000" />
+      <workItem from="1597676829745" duration="2516000" />
+      <workItem from="1597679597456" duration="59000" />
+      <workItem from="1597737254706" duration="4925000" />
+      <workItem from="1597766962867" duration="2662000" />
+    </task>
+    <task id="LOCAL-00001" summary="add products repository with sorting by price">
+      <created>1592926487212</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1592926487212</updated>
+    </task>
+    <task id="LOCAL-00002" summary="add data.sql with dummy products&#10;update index.html using Thymeleaf">
+      <created>1596123104693</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1596123104693</updated>
+    </task>
+    <task id="LOCAL-00003" summary="populate db with real data">
+      <created>1597246687760</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1597246687760</updated>
+    </task>
+    <task id="LOCAL-00004" summary="to review">
+      <created>1597385680157</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1597385680157</updated>
+    </task>
+    <task id="LOCAL-00005" summary="add products urls&#10;correct search logic&#10;change db to h2">
+      <created>1597676252041</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1597676252041</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="add products repository with sorting by price" />
+    <MESSAGE value="add data.sql with dummy products&#10;update index.html using Thymeleaf" />
+    <MESSAGE value="populate db with real data" />
+    <MESSAGE value="to review" />
+    <MESSAGE value="add products urls&#10;correct search logic&#10;change db to h2" />
+    <option name="LAST_COMMIT_MESSAGE" value="add products urls&#10;correct search logic&#10;change db to h2" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="-1008" y="100" key="#Notifications" timestamp="1594209563249">
+      <screen x="-1200" y="-517" width="1200" height="1920" />
+    </state>
+    <state x="-1008" y="100" key="#Notifications/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1594209563249" />
+    <state x="-1008" y="100" key="#Plugins" timestamp="1593862186902">
+      <screen x="-1200" y="-517" width="1200" height="1920" />
+    </state>
+    <state x="-1008" y="100" key="#Plugins/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1593862186902" />
+    <state x="-1008" y="100" key="#SQL_Dialects" timestamp="1596115026178">
+      <screen x="-1200" y="-517" width="1200" height="1920" />
+    </state>
+    <state x="-1008" y="100" key="#SQL_Dialects/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1596115026178" />
+    <state x="-1092" y="100" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1597676936070">
+      <screen x="-1200" y="-517" width="1200" height="1920" />
+    </state>
+    <state x="-1092" y="100" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1597676936070" />
+    <state x="-863" y="245" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1592909866971">
+      <screen x="-1200" y="-517" width="1200" height="1920" />
+    </state>
+    <state x="-863" y="245" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1592909866971" />
+    <state x="-961" y="129" key="#com.intellij.ide.fileTemplates.ui.ConfigureTemplatesDialog" timestamp="1593440148169">
+      <screen x="-1200" y="-517" width="1200" height="1920" />
+    </state>
+    <state x="-961" y="129" key="#com.intellij.ide.fileTemplates.ui.ConfigureTemplatesDialog/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1593440148169" />
+    <state x="-831" y="143" key="#com.intellij.ide.util.MemberChooser" timestamp="1597663891593">
+      <screen x="-1200" y="-517" width="1200" height="1920" />
+    </state>
+    <state x="-831" y="143" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1597663891593" />
+    <state x="590" y="361" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1050/-1200.-517.1200.1920@0.0.1920.1050" timestamp="1597242171197" />
+    <state x="-920" y="178" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1595231746865">
+      <screen x="-1200" y="-517" width="1200" height="1920" />
+    </state>
+    <state x="-920" y="178" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1595231746865" />
+    <state x="-968" y="-227" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1597740424047">
+      <screen x="-1200" y="-517" width="1200" height="1920" />
+    </state>
+    <state x="-968" y="-227" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1597740424047" />
+    <state x="-870" y="189" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1595606521540">
+      <screen x="-1200" y="-517" width="1200" height="1920" />
+    </state>
+    <state x="-870" y="189" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1595606521540" />
+    <state x="60" y="43" width="1174" height="968" key="CommitChangelistDialog2" timestamp="1597676251112">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="60" y="43" width="1174" height="968" key="CommitChangelistDialog2/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1597676251112" />
+    <state x="-820" y="197" key="FileChooserDialogImpl" timestamp="1597740604424">
+      <screen x="-1200" y="-517" width="1200" height="1920" />
+    </state>
+    <state x="-820" y="197" key="FileChooserDialogImpl/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1597740604424" />
+    <state width="1156" height="431" key="GridCell.Tab.0.bottom" timestamp="1597768061375">
+      <screen x="-1200" y="-517" width="1200" height="1920" />
+    </state>
+    <state width="1156" height="431" key="GridCell.Tab.0.bottom/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1597768061375" />
+    <state width="1156" height="567" key="GridCell.Tab.0.bottom/0.0.1920.1050/-1200.-517.1200.1920@0.0.1920.1050" timestamp="1595949285910" />
+    <state width="1156" height="431" key="GridCell.Tab.0.center" timestamp="1597768061375">
+      <screen x="-1200" y="-517" width="1200" height="1920" />
+    </state>
+    <state width="1156" height="431" key="GridCell.Tab.0.center/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1597768061375" />
+    <state width="1156" height="567" key="GridCell.Tab.0.center/0.0.1920.1050/-1200.-517.1200.1920@0.0.1920.1050" timestamp="1595949285909" />
+    <state width="1156" height="431" key="GridCell.Tab.0.left" timestamp="1597768061375">
+      <screen x="-1200" y="-517" width="1200" height="1920" />
+    </state>
+    <state width="1156" height="431" key="GridCell.Tab.0.left/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1597768061375" />
+    <state width="1156" height="567" key="GridCell.Tab.0.left/0.0.1920.1050/-1200.-517.1200.1920@0.0.1920.1050" timestamp="1595949285909" />
+    <state width="1156" height="431" key="GridCell.Tab.0.right" timestamp="1597768061375">
+      <screen x="-1200" y="-517" width="1200" height="1920" />
+    </state>
+    <state width="1156" height="431" key="GridCell.Tab.0.right/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1597768061375" />
+    <state width="1156" height="567" key="GridCell.Tab.0.right/0.0.1920.1050/-1200.-517.1200.1920@0.0.1920.1050" timestamp="1595949285910" />
+    <state width="1156" height="431" key="GridCell.Tab.1.bottom" timestamp="1597768061375">
+      <screen x="-1200" y="-517" width="1200" height="1920" />
+    </state>
+    <state width="1156" height="431" key="GridCell.Tab.1.bottom/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1597768061375" />
+    <state width="1156" height="567" key="GridCell.Tab.1.bottom/0.0.1920.1050/-1200.-517.1200.1920@0.0.1920.1050" timestamp="1595949285910" />
+    <state width="1156" height="431" key="GridCell.Tab.1.center" timestamp="1597768061375">
+      <screen x="-1200" y="-517" width="1200" height="1920" />
+    </state>
+    <state width="1156" height="431" key="GridCell.Tab.1.center/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1597768061375" />
+    <state width="1156" height="567" key="GridCell.Tab.1.center/0.0.1920.1050/-1200.-517.1200.1920@0.0.1920.1050" timestamp="1595949285910" />
+    <state width="1156" height="431" key="GridCell.Tab.1.left" timestamp="1597768061375">
+      <screen x="-1200" y="-517" width="1200" height="1920" />
+    </state>
+    <state width="1156" height="431" key="GridCell.Tab.1.left/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1597768061375" />
+    <state width="1156" height="567" key="GridCell.Tab.1.left/0.0.1920.1050/-1200.-517.1200.1920@0.0.1920.1050" timestamp="1595949285910" />
+    <state width="1156" height="431" key="GridCell.Tab.1.right" timestamp="1597768061375">
+      <screen x="-1200" y="-517" width="1200" height="1920" />
+    </state>
+    <state width="1156" height="431" key="GridCell.Tab.1.right/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1597768061375" />
+    <state width="1156" height="567" key="GridCell.Tab.1.right/0.0.1920.1050/-1200.-517.1200.1920@0.0.1920.1050" timestamp="1595949285910" />
+    <state width="1156" height="414" key="GridCell.Tab.2.bottom" timestamp="1597676675768">
+      <screen x="-1200" y="-517" width="1200" height="1920" />
+    </state>
+    <state width="1156" height="414" key="GridCell.Tab.2.bottom/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1597676675768" />
+    <state width="1156" height="414" key="GridCell.Tab.2.center" timestamp="1597676675768">
+      <screen x="-1200" y="-517" width="1200" height="1920" />
+    </state>
+    <state width="1156" height="414" key="GridCell.Tab.2.center/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1597676675768" />
+    <state width="1156" height="414" key="GridCell.Tab.2.left" timestamp="1597676675768">
+      <screen x="-1200" y="-517" width="1200" height="1920" />
+    </state>
+    <state width="1156" height="414" key="GridCell.Tab.2.left/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1597676675768" />
+    <state width="1156" height="414" key="GridCell.Tab.2.right" timestamp="1597676675768">
+      <screen x="-1200" y="-517" width="1200" height="1920" />
+    </state>
+    <state width="1156" height="414" key="GridCell.Tab.2.right/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1597676675768" />
+    <state width="196" height="457" key="HiddenNamespacesPopup" timestamp="1597768465855">
+      <screen x="-1200" y="-517" width="1200" height="1920" />
+    </state>
+    <state width="196" height="457" key="HiddenNamespacesPopup/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1597768465855" />
+    <state x="-1099" y="74" key="SettingsEditor" timestamp="1597769643579">
+      <screen x="-1200" y="-517" width="1200" height="1920" />
+    </state>
+    <state x="-1099" y="74" key="SettingsEditor/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1597769643579" />
+    <state x="-849" y="225" key="Vcs.Push.Dialog.v2" timestamp="1597768701415">
+      <screen x="-1200" y="-517" width="1200" height="1920" />
+    </state>
+    <state x="-849" y="225" key="Vcs.Push.Dialog.v2/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1597768701415" />
+    <state x="-899" y="265" key="com.intellij.ide.util.TipDialog" timestamp="1593862146317">
+      <screen x="-1200" y="-517" width="1200" height="1920" />
+    </state>
+    <state x="-899" y="265" key="com.intellij.ide.util.TipDialog/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1593862146317" />
+    <state x="-791" y="359" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1597665867524">
+      <screen x="-1200" y="-517" width="1200" height="1920" />
+    </state>
+    <state x="-791" y="359" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1597665867524" />
+    <state x="-1200" y="62" key="new project wizard" timestamp="1596631084363">
+      <screen x="-1200" y="-517" width="1200" height="1920" />
+    </state>
+    <state x="-1200" y="62" key="new project wizard/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1596631084363" />
+    <state x="-937" y="-72" width="672" height="678" key="search.everywhere.popup" timestamp="1597768608273">
+      <screen x="-1200" y="-517" width="1200" height="1920" />
+    </state>
+    <state x="-937" y="-72" width="672" height="678" key="search.everywhere.popup/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1597768608273" />
+  </component>
+</project>
