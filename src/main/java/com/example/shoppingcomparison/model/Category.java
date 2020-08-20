@@ -2,19 +2,19 @@ package com.example.shoppingcomparison.model;
 
 public enum Category {
 
-    ACCESORIE,
+    ACCESSORIES,
     UNDERWEAR,
     BLOUSE,
-    SHOE,
+    SHOES,
     JEANS,
     DUNGAREE,
-    SHIRT,
-    JACKET,
-    COAT,
+    SHIRTS,
+    JACKETS,
+    COATS,
     LEGGINGS,
-    DRESS_JACKET,
+    DRESS_JACKETS,
     SHORTS,
     TROUSERS,
-    PURSE
+    PURSES
 
 }

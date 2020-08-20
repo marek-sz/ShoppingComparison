@@ -17,9 +17,19 @@ public class Product {
     private BigDecimal price;
     private String url;
 
+    @Enumerated(EnumType.STRING)
+    private Category category;
+
     @ManyToOne
     private Shop shop;
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category type) {
+        this.category = type;
+    }
 
     public String getUrl() {
         return url;
@@ -28,7 +38,6 @@ public class Product {
     public void setUrl(String url) {
         this.url = url;
     }
-
 
     public Shop getShop() {
         return shop;

@@ -1,5 +1,6 @@
 package com.example.shoppingcomparison;
 
+import com.example.shoppingcomparison.model.Category;
 import com.example.shoppingcomparison.model.Product;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -44,6 +45,7 @@ public class VitkacShoesScrapper {
                 product.setBrand(scrapeBrand);
                 product.setPrice(price);
                 product.setUrl(absHref);
+                product.setCategory(Category.SHOES);
                 products.add(product);
             }
         }

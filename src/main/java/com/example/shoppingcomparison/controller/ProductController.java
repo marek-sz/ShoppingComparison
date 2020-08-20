@@ -1,5 +1,6 @@
 package com.example.shoppingcomparison.controller;
 
+import com.example.shoppingcomparison.model.Category;
 import com.example.shoppingcomparison.model.Product;
 import com.example.shoppingcomparison.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,14 @@ public class ProductController {
     }
 
     @GetMapping("/allProducts")
-    public String getAllProducts(Model model) {
+    public String getAllProducts(
+            @RequestParam("category") String category, Model model) {
         List<Product> products = productRepository.findAll();
-        model.addAttribute("products", products);
+        List<Product> filteredProducts =
+                products.stream()
+                        .filter(p -> p.getCategory().toString().equals(category))
+                        .collect(Collectors.toList());
+        model.addAttribute("products", filteredProducts);
         return "index";
     }
 

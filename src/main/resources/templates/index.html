@@ -36,32 +36,36 @@
             <nav class="col-lg-3 pr-5 mb-5">
                 <h3 class="pl-2">Kategorie</h3>
                 <ul class="list-group-flush p-0">
-                    <a href="#" class="list-group-item list-group-item-action list-group-item-light px-2">Akcesoria
-                        damskie</a>
-                    <a href="#" class="list-group-item list-group-item-action list-group-item-light px-2">Bielizna
-                        damska</a>
-                    <a href="#" class="list-group-item list-group-item-action list-group-item-light px-2">Bluzki
-                        damskie</a>
-                    <a href="#" th:href="@{/allProducts}" class="list-group-item list-group-item-action list-group-item-light px-2">Buty
-                        damskie</a>
-                    <a href="#" class="list-group-item list-group-item-action list-group-item-light px-2">Jeansy
-                        damskie</a>
-                    <a href="#"
+                    <a th:href="@{/allProducts(category='ACCESSORIES')}"
+                       class="list-group-item list-group-item-action list-group-item-light px-2">Akcesoria damskie</a>
+                    <a th:href="@{/allProducts(category='UNDERWEAR')}"
+                       class="list-group-item list-group-item-action list-group-item-light px-2">Bielizna damska</a>
+                    <a th:href="@{/allProducts(category='BLOUSE')}"
+                       class="list-group-item list-group-item-action list-group-item-light px-2">Bluzki damskie</a>
+                    <a th:href="@{/allProducts(category='SHOES')}"
+                       class="list-group-item list-group-item-action list-group-item-light px-2">Buty damskie</a>
+                    <a th:href="@{/allProducts(category='JEANS')}"
+                       class="list-group-item list-group-item-action list-group-item-light px-2">Jeansy damskie</a>
+                    <a th:href="@{/allProducts(category='DUNGAREE')}"
                        class="list-group-item list-group-item-action list-group-item-light px-2">Kombinezony</a>
-                    <a href="#" class="list-group-item list-group-item-action list-group-item-light px-2">Koszule
+                    <a th:href="@{/allProducts(category='JACKETS')}"
+                       class="list-group-item list-group-item-action list-group-item-light px-2">Koszule
                         damskie</a>
-                    <a href="#" class="list-group-item list-group-item-action list-group-item-light px-2">Kurtki i
+                    <a th:href="@{/allProducts(category='COATS')}"
+                       class="list-group-item list-group-item-action list-group-item-light px-2">Kurtki i
                         płaszcze damskie</a>
-                    <a href="#"
+                    <a th:href="@{/allProducts(category='LEGGINGS')}"
                        class="list-group-item list-group-item-action list-group-item-light px-2">Legginsy</a>
-                    <a href="#" class="list-group-item list-group-item-action list-group-item-light px-2">Marynarki
-                        i
-                        żakiety</a>
-                    <a href="#" class="list-group-item list-group-item-action list-group-item-light px-2">Spodenki
+                    <a th:href="@{/allProducts(category='DRESS_JACKETS')}"
+                       class="list-group-item list-group-item-action list-group-item-light px-2">Marynarki i żakiety</a>
+                    <a th:href="@{/allProducts(category='SHORTS')}"
+                       class="list-group-item list-group-item-action list-group-item-light px-2">Spodenki
                         damskie</a>
-                    <a href="#" class="list-group-item list-group-item-action list-group-item-light px-2">Spodnie
+                    <a th:href="@{/allProducts(category='TROUSERS')}"
+                       class="list-group-item list-group-item-action list-group-item-light px-2">Spodnie
                         damskie</a>
-                    <a href="#" class="list-group-item list-group-item-action list-group-item-light px-2">Torebki
+                    <a th:href="@{/allProducts(category='PURSES')}"
+                       class="list-group-item list-group-item-action list-group-item-light px-2">Torebki
                         damskie</a>
                 </ul>
             </nav>

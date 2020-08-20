@@ -1,5 +1,6 @@
 package com.example.shoppingcomparison;
 
+import com.example.shoppingcomparison.model.Category;
 import com.example.shoppingcomparison.model.Product;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -12,13 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class MolieraScrapper {
+public class MolieraShoesScrapper {
 
     final String url = "https://www.moliera2.com/1/4/buty";
     final Document document = Jsoup.connect(url).userAgent("Chrome").ignoreHttpErrors(true).get();
         // currency PLN
 
-    public MolieraScrapper() throws IOException {
+    public MolieraShoesScrapper() throws IOException {
     }
 
     List<Product> scrapeProducts() {
@@ -42,6 +43,7 @@ public class MolieraScrapper {
                 product.setBrand(scrapeBrand);
                 product.setPrice(price);
                 product.setUrl(absHref);
+                product.setCategory(Category.SHOES);
                 products.add(product);
             }
         }

@@ -11,20 +11,20 @@ import java.util.List;
 @Component
 public class RunAtStart {
     private final ProductRepository productRepository;
-    private final VitkacShoesScrapper vitkacScrapper;
-    private final MolieraScrapper molieraScrapper;
+    private final VitkacShoesScrapper vitkacShoesScrapper;
+    private final MolieraShoesScrapper molieraShoesScrapper;
 
     @Autowired
-    public RunAtStart(ProductRepository productRepository, VitkacShoesScrapper vitkacScrapper, MolieraScrapper molieraScrapper) {
+    public RunAtStart(ProductRepository productRepository, VitkacShoesScrapper vitkacShoesScrapper, MolieraShoesScrapper molieraShoesScrapper) {
         this.productRepository = productRepository;
-        this.vitkacScrapper = vitkacScrapper;
-        this.molieraScrapper = molieraScrapper;
+        this.vitkacShoesScrapper = vitkacShoesScrapper;
+        this.molieraShoesScrapper = molieraShoesScrapper;
     }
 
     @PostConstruct
     public void runAtStart() {
-        List<Product> vitkacProducts = vitkacScrapper.scrapeProducts();
-        List<Product> molieraProducts = molieraScrapper.scrapeProducts();
+        List<Product> vitkacProducts = vitkacShoesScrapper.scrapeProducts();
+        List<Product> molieraProducts = molieraShoesScrapper.scrapeProducts();
 
         for (Product product : vitkacProducts) {
             productRepository.save(product);
