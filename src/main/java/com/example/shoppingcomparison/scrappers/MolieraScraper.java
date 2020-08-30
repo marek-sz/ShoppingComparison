@@ -1,7 +1,8 @@
-package com.example.shoppingcomparison;
+package com.example.shoppingcomparison.scrappers;
 
 import com.example.shoppingcomparison.model.Category;
 import com.example.shoppingcomparison.model.Product;
+import com.example.shoppingcomparison.repository.ProductRepository;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -9,22 +10,19 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
-public class MolieraShoesScrapper {
+public class MolieraScrapper implements Scrapper {
+    private final ProductRepository productRepository;
+    private final String url = "https://www.moliera2.com/1/4/buty";
+    private final Document document = Jsoup.connect(url).userAgent("Chrome").ignoreHttpErrors(true).get();
+    // currency PLN
 
-    final String url = "https://www.moliera2.com/1/4/buty";
-    final Document document = Jsoup.connect(url).userAgent("Chrome").ignoreHttpErrors(true).get();
-        // currency PLN
-
-    public MolieraShoesScrapper() throws IOException {
+    public MolieraScrapper(ProductRepository productRepository) throws IOException {
+        this.productRepository = productRepository;
     }
 
-    List<Product> scrapeProducts() {
-        List<Product> products = new ArrayList<>();
-
+    public void scrapeProducts() {
         for (Element row : document.select("div#product-list div")) {
             String scrapeBrand = row.select("div.product-list-item-feature-designer").text();
             String scrapeModel = row.select("div.product-list-item-name").text();
@@ -44,9 +42,10 @@ public class MolieraShoesScrapper {
                 product.setPrice(price);
                 product.setUrl(absHref);
                 product.setCategory(Category.SHOES);
-                products.add(product);
+                productRepository.save(product);
             }
         }
-        return products;
     }
+
+
 }
