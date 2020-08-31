@@ -23,30 +23,6 @@ public class Product {
     @ManyToOne
     private Shop shop;
 
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category type) {
-        this.category = type;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public Shop getShop() {
-        return shop;
-    }
-
-    public void setShop(Shop shop) {
-        this.shop = shop;
-    }
-
     public long getId() {
         return id;
     }
@@ -78,4 +54,29 @@ public class Product {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category type) {
+        this.category = type;
+    }
+
+    public Shop getShop() {
+        return shop;
+    }
+
+    public void setShop(Shop shop) {
+        this.shop = shop;
+    }
+
 }

@@ -3,6 +3,7 @@ package com.example.shoppingcomparison.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,15 +15,19 @@ public class Shop {
     private long id;
     private String shopName;
 
-    @OneToMany(mappedBy = "shop")
-    private List<Product> products;
+    @OneToMany(mappedBy = "shop", cascade = CascadeType.ALL)
+    List<Product> products = new ArrayList<>();
 
-    public List<Product> getProducts() {
-        return products;
+    public void addProduct(Product product) {
+        product.setShop(this);
+        this.products.add(product);
     }
 
-    public void setProducts(List<Product> products) {
-        this.products = products;
+    public Shop() {
+    }
+
+    public Shop(String shopName) {
+        this.shopName = shopName;
     }
 
     public long getId() {
@@ -41,4 +46,16 @@ public class Shop {
         this.shopName = shopName;
     }
 
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
+    @Override
+    public String toString() {
+        return shopName;
+    }
 }

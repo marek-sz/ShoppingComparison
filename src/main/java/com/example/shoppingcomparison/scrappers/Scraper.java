@@ -1,5 +1,9 @@
 package com.example.shoppingcomparison.scrappers;
 
-public interface Scrapper {
-    void scrapeProducts();
+import com.example.shoppingcomparison.model.Category;
+
+import java.io.IOException;
+
+public interface Scraper {
+    void scrapeProducts(Category category) throws IOException;
 }
