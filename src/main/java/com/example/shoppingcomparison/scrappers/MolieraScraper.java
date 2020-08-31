@@ -21,7 +21,6 @@ public class MolieraScraper implements Scraper {
     private final ProductRepository productRepository;
     private final ShopRepository shopRepository;
     private URL homeUrl = new URL("https://www.moliera2.com");
-
     // currency PLN
 
     Map<Category, String> categoryMap = new HashMap<>();
@@ -32,7 +31,6 @@ public class MolieraScraper implements Scraper {
     }
 
     public void scrapeProducts(Category category) throws IOException {
-
         Shop shop = new Shop("Moliera");
         shopRepository.save(shop);
 
@@ -53,24 +51,24 @@ public class MolieraScraper implements Scraper {
 
         String url = new URL(homeUrl, categoryMap.get(category)).toString();
 
-        while (url != "") {
+        while (!url.isEmpty()) {
             Document page = Jsoup.connect(url).get();
             String nextUrl = page.select("ul.pagination > li.next > a").attr("abs:href");
 
             for (Element row : page.select("div#product-list div")) {
-                String scrapeBrand = row.select("div.product-list-item-feature-designer").text();
-                String scrapeModel = row.select("div.product-list-item-name").text();
-                String scrapePrice = row.select("div.product-list-item-regular-price").text();
-                String scrapeSellPrice = row.select("div.product-list-item-sell-price").text();
+                String scrapeBrand, scrapeModel, scrapeRegularPrice, scrapeSellPrice, currentPrice;
+                scrapeBrand = row.select("div.product-list-item-feature-designer").text();
+                scrapeModel = row.select("div.product-list-item-name").text();
+                scrapeRegularPrice = row.select("div.product-list-item-regular-price").text();
+                scrapeSellPrice = row.select("div.product-list-item-sell-price").text();
+                currentPrice = checkCurrentPrice(scrapeRegularPrice, scrapeSellPrice);
                 Element link = row.select("a").first();
 
-                if (scrapeBrand.equals("") || scrapeModel.equals("") || scrapePrice.equals("") || link == null) {
+                if (scrapeBrand.equals("") || scrapeModel.equals("") || currentPrice == null || link == null) {
                     continue;
                 } else {
                     String absHref = link.attr("abs:href");
-
-                    String scrapePriceFormatted = scrapePrice.substring(0, scrapePrice.indexOf('z')).replaceAll("\\s+", "");
-                    BigDecimal price = new BigDecimal(scrapePriceFormatted);
+                    BigDecimal price = formatPrice(currentPrice);
 
                     Product product = new Product();
                     product.setModel(scrapeModel);
@@ -88,7 +86,18 @@ public class MolieraScraper implements Scraper {
         }
     }
 
-    boolean isDiscounted(String price) {
-        return false;
+    String checkCurrentPrice(String regularPrice, String sellPrice) {
+        if (!regularPrice.isEmpty()) {
+            return regularPrice;
+        } else if (!sellPrice.isEmpty()) {
+            return sellPrice;
+        } else {
+            return null;
+        }
+    }
+
+    BigDecimal formatPrice(String currentPrice) {
+        String currentPriceFormatted = currentPrice.substring(0, currentPrice.indexOf('z')).replaceAll("\\s+", "");
+        return new BigDecimal(currentPriceFormatted);
     }
 }

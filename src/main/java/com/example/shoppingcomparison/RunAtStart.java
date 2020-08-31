@@ -24,13 +24,7 @@ public class RunAtStart {
 
     @PostConstruct
     public void runAtStart() throws IOException {
-
-            molieraScrapper.scrapeProducts(Category.SHOES);
-//        for (Category category : Category.values()) {
-//
-//            molieraScrapper.scrapeProducts(category);
-//        vitkacScraper.scrapeProducts(category);
-//        }
+        molieraScrapper.scrapeProducts(Category.ACCESSORIES);
 
     }
 }
