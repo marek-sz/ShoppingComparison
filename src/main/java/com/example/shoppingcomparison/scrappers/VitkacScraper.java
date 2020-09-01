@@ -2,7 +2,9 @@ package com.example.shoppingcomparison.scrappers;
 
 import com.example.shoppingcomparison.model.Category;
 import com.example.shoppingcomparison.model.Product;
+import com.example.shoppingcomparison.model.Shop;
 import com.example.shoppingcomparison.repository.ProductRepository;
+import com.example.shoppingcomparison.repository.ShopRepository;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -15,15 +17,19 @@ import java.math.BigDecimal;
 @Service
 public class VitkacScraper implements Scraper {
     private final ProductRepository productRepository;
+    private final ShopRepository shopRepository;
     private final String url = "https://www.vitkac.com/pl/sklep/kobiety/buty-1";
     private final Document document = Jsoup.connect(url).userAgent("Chrome").ignoreHttpErrors(true).get();
     // currency PLN
 
-    public VitkacScraper(ProductRepository productRepository) throws IOException {
+    public VitkacScraper(ProductRepository productRepository, ShopRepository shopRepository) throws IOException {
         this.productRepository = productRepository;
+        this.shopRepository = shopRepository;
     }
 
     public void scrapeProducts(Category category) throws IOException {
+        Shop shop = new Shop("Vitkac");
+        shopRepository.save(shop);
 
         Elements pagination = document.select("span#offsets_top > li > a");
         for (Element e : pagination) {
@@ -49,6 +55,7 @@ public class VitkacScraper implements Scraper {
                     product.setPrice(price);
                     product.setUrl(absHref);
                     product.setCategory(category);
+                    shop.addProduct(product);
                     productRepository.save(product);
 
                 }
