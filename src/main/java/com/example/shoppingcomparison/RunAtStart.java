@@ -27,9 +27,11 @@ public class RunAtStart {
     @PostConstruct
     public void runAtStart() throws IOException {
 
-        for (Scraper scraper : scrapers) {
-            scraper.scrapeProducts(Category.SHOES);
-        }
+        scrapers.get(1).scrapeProducts(Category.ACCESSORIES);
+
+//        for (Scraper scraper : scrapers) {
+//            scraper.scrapeProducts(Category.ACCESSORIES);
+//        }
         //https://dzone.com/articles/load-all-implementors
     }
 }

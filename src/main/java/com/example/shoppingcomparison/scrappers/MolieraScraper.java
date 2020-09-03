@@ -21,9 +21,8 @@ public class MolieraScraper implements Scraper {
     private final ProductRepository productRepository;
     private final ShopRepository shopRepository;
     private URL homeUrl = new URL("https://www.moliera2.com");
+    private Map<Category, String> categoryMap = new HashMap<>();
     // currency PLN
-
-    Map<Category, String> categoryMap = new HashMap<>();
 
     public MolieraScraper(ProductRepository productRepository, ShopRepository shopRepository) throws IOException {
         this.productRepository = productRepository;
@@ -34,20 +33,7 @@ public class MolieraScraper implements Scraper {
         Shop shop = new Shop("Moliera");
         shopRepository.save(shop);
 
-        categoryMap.put(Category.ACCESSORIES, "/1/2/dodatki");
-        categoryMap.put(Category.UNDERWEAR, "/1/1/30/bielizna");
-        categoryMap.put(Category.BLOUSE, "/1/1/35/t-shirty---koszule---bluzki");
-        categoryMap.put(Category.SHOES, "/1/4/buty");
-        categoryMap.put(Category.JEANS, "/1/1/56/spodnie---jeansy---leginsy");
-        categoryMap.put(Category.DUNGAREE, "/1/1/126/kombinezony");
-//        categoryMap.put(Category.SHIRTS, "/1/4/buty");
-        categoryMap.put(Category.JACKETS, "/1/1/33/kurtki---plaszcze---parki");
-//        categoryMap.put(Category.COATS, "/1/1/33/kurtki---plaszcze---parki");
-//        categoryMap.put(Category.LEGGINGS, "/1/1/56/spodnie---jeansy---leginsy");
-        categoryMap.put(Category.DRESS_JACKETS, "/1/1/37/marynarki---kamizelki");
-        categoryMap.put(Category.SHORTS, "/1/1/38/spodenki");
-//        categoryMap.put(Category.TROUSERS, "/1/1/56/spodnie---jeansy---leginsy");
-        categoryMap.put(Category.PURSES, "/1/3/torby");
+        populateMap();
 
         String url = new URL(homeUrl, categoryMap.get(category)).toString();
 
@@ -86,7 +72,20 @@ public class MolieraScraper implements Scraper {
         }
     }
 
-    String checkCurrentPrice(String regularPrice, String sellPrice) {
+    private void populateMap() {
+        categoryMap.put(Category.ACCESSORIES, "/1/2/dodatki");
+        categoryMap.put(Category.UNDERWEAR, "/1/1/30/bielizna");
+        categoryMap.put(Category.BLOUSE, "/1/1/35/t-shirty---koszule---bluzki");
+        categoryMap.put(Category.SHOES, "/1/4/buty");
+        categoryMap.put(Category.JEANS, "/1/1/56/spodnie---jeansy---leginsy");
+        categoryMap.put(Category.DUNGAREE, "/1/1/126/kombinezony");
+        categoryMap.put(Category.JACKETS, "/1/1/33/kurtki---plaszcze---parki");
+        categoryMap.put(Category.DRESS_JACKETS, "/1/1/37/marynarki---kamizelki");
+        categoryMap.put(Category.SHORTS, "/1/1/38/spodenki");
+        categoryMap.put(Category.PURSES, "/1/3/torby");
+    }
+
+    private String checkCurrentPrice(String regularPrice, String sellPrice) {
         if (!regularPrice.isEmpty()) {
             return regularPrice;
         } else if (!sellPrice.isEmpty()) {
@@ -96,7 +95,7 @@ public class MolieraScraper implements Scraper {
         }
     }
 
-    BigDecimal formatPrice(String currentPrice) {
+    private BigDecimal formatPrice(String currentPrice) {
         String currentPriceFormatted = currentPrice.substring(0, currentPrice.indexOf('z')).replaceAll("\\s+", "");
         return new BigDecimal(currentPriceFormatted);
     }

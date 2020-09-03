@@ -5,21 +5,26 @@ import com.example.shoppingcomparison.model.Product;
 import com.example.shoppingcomparison.model.Shop;
 import com.example.shoppingcomparison.repository.ProductRepository;
 import com.example.shoppingcomparison.repository.ShopRepository;
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class VitkacScraper implements Scraper {
     private final ProductRepository productRepository;
     private final ShopRepository shopRepository;
-    private final String url = "https://www.vitkac.com/pl/sklep/kobiety/buty-1";
-    private final Document document = Jsoup.connect(url).userAgent("Chrome").ignoreHttpErrors(true).get();
+
+    private URL homeUrl = new URL("https://www.vitkac.com");
+    private Map<Category, String> categoryMap = new HashMap<>();
     // currency PLN
 
     public VitkacScraper(ProductRepository productRepository, ShopRepository shopRepository) throws IOException {
@@ -31,11 +36,12 @@ public class VitkacScraper implements Scraper {
         Shop shop = new Shop("Vitkac");
         shopRepository.save(shop);
 
-        Elements pagination = document.select("span#offsets_top > li > a");
-        for (Element e : pagination) {
-            String url = e.attr("abs:href");
-            Document page = Jsoup.connect(url).get();
+        populateMap();
+        String url = new URL(homeUrl, categoryMap.get(category)).toString();
 
+        while (!url.isEmpty() && getHttpResponseStatusCode(url) == 200) {
+            Document page = Jsoup.connect(url).get();
+            String nextUrl = page.select("span#offsets_top.dropdown.na-stronie > a.small").last().attr("abs:href");
             for (Element row : page.select("article#productList div")) {
                 String scrapeBrand = row.select("h4").text();
                 String scrapeModel = row.select("p").text();
@@ -57,9 +63,33 @@ public class VitkacScraper implements Scraper {
                     product.setCategory(category);
                     shop.addProduct(product);
                     productRepository.save(product);
-
+                    System.out.println(product);
                 }
             }
+            if (!nextUrl.equals(url)) {
+                url = nextUrl;
+            } else break;
         }
+    }
+
+    private void populateMap() {
+        categoryMap.put(Category.ACCESSORIES, "/pl/sklep/kobiety/akcesoria-2");
+        categoryMap.put(Category.UNDERWEAR, "/pl/sklep/kobiety/bielizna-skarpety-1");
+        categoryMap.put(Category.SHOES, "/pl/sklep/kobiety/buty-1");
+        categoryMap.put(Category.JEANS, "/pl/sklep/kobiety/jeansy-1");
+        categoryMap.put(Category.DUNGAREE, "/pl/sklep/kobiety/kombinezony");
+        categoryMap.put(Category.SHIRTS, "/pl/sklep/kobiety/spodnice");
+        categoryMap.put(Category.JACKETS, "/pl/sklep/kobiety/kurtki-1");
+        categoryMap.put(Category.COATS, "/pl/sklep/kobiety/plaszcze-1");
+        categoryMap.put(Category.SHORTS, "/pl/sklep/kobiety/spodnie-1");
+        categoryMap.put(Category.PURSES, "/pl/sklep/kobiety/torby-2");
+    }
+
+    private int getHttpResponseStatusCode(String url) throws IOException {
+        URL url1 = new URL(url);
+        HttpURLConnection connection = (HttpURLConnection) url1.openConnection();
+        connection.setRequestMethod("POST");
+        connection.connect();
+        return connection.getResponseCode();
     }
 }
