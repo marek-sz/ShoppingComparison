@@ -37,11 +37,11 @@ public class VitkacScraper implements Scraper {
         shopRepository.save(shop);
 
         populateMap();
+
         String url = new URL(homeUrl, categoryMap.get(category)).toString();
 
         while (!url.isEmpty() && getHttpResponseStatusCode(url) == 200) {
             Document page = Jsoup.connect(url).get();
-            String nextUrl = page.select("span#offsets_top.dropdown.na-stronie > a.small").last().attr("abs:href");
             for (Element row : page.select("article#productList div")) {
                 String scrapeBrand = row.select("h4").text();
                 String scrapeModel = row.select("p").text();
@@ -66,10 +66,24 @@ public class VitkacScraper implements Scraper {
                     System.out.println(product);
                 }
             }
-            if (!nextUrl.equals(url)) {
+
+            String nextUrl = returnNextUrlIfExist(page);
+            if (nextUrl == null || nextUrl.equals(url)) {
+                break;
+            } else {
                 url = nextUrl;
-            } else break;
+            }
         }
+    }
+
+    private String returnNextUrlIfExist(Document page) throws NullPointerException {
+        String nextUrl = null;
+        try {
+            nextUrl = page.select("span#offsets_top.dropdown.na-stronie > a.small").last().attr("abs:href");
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+        return nextUrl;
     }
 
     private void populateMap() {

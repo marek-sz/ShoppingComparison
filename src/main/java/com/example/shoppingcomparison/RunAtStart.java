@@ -23,16 +23,22 @@ public class RunAtStart {
     public RunAtStart(List<Scraper> scrapers) {
         this.scrapers = scrapers;
     }
+    //can autowire enum type??
 
     @PostConstruct
     public void runAtStart() throws IOException {
 
-        scrapers.get(1).scrapeProducts(Category.ACCESSORIES);
+//        scrapers.get(1).scrapeProducts(Category.DUNGAREE);
 
-//        for (Scraper scraper : scrapers) {
-//            scraper.scrapeProducts(Category.ACCESSORIES);
-//        }
-        //https://dzone.com/articles/load-all-implementors
+        for (Scraper scraper : scrapers) {
+            for (Category category : Category.values()) {
+                try {
+                    scraper.scrapeProducts(category);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }
 

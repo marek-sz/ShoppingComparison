@@ -67,7 +67,6 @@ public class MolieraScraper implements Scraper {
                     System.out.println(product);
                 }
             }
-            //pagination
             url = nextUrl;
         }
     }
@@ -77,6 +76,7 @@ public class MolieraScraper implements Scraper {
         categoryMap.put(Category.UNDERWEAR, "/1/1/30/bielizna");
         categoryMap.put(Category.BLOUSE, "/1/1/35/t-shirty---koszule---bluzki");
         categoryMap.put(Category.SHOES, "/1/4/buty");
+        categoryMap.put(Category.JEANS, "/1/1/56/spodnie---jeansy---leginsy");
         categoryMap.put(Category.JEANS, "/1/1/56/spodnie---jeansy---leginsy");
         categoryMap.put(Category.DUNGAREE, "/1/1/126/kombinezony");
         categoryMap.put(Category.JACKETS, "/1/1/33/kurtki---plaszcze---parki");

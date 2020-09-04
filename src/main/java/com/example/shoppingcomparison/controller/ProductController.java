@@ -1,6 +1,5 @@
 package com.example.shoppingcomparison.controller;
 
-import com.example.shoppingcomparison.model.Category;
 import com.example.shoppingcomparison.model.Product;
 import com.example.shoppingcomparison.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
