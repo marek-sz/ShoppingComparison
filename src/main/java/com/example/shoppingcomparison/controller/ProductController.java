@@ -14,8 +14,7 @@ import java.util.stream.Collectors;
 
 @Controller
 public class ProductController {
-
-    final ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
     @Autowired
     public ProductController(ProductRepository productRepository) {
@@ -37,7 +36,6 @@ public class ProductController {
     @GetMapping("/products")
     public String findByName(
             @RequestParam("productName") String productName, Model model) {
-
         List<Product> products = productRepository.findAll();
         List<Product> filteredProducts =
                 products.stream()
@@ -72,5 +70,4 @@ public class ProductController {
         model.addAttribute("products", products);
         return "index";
     }
-
 }
