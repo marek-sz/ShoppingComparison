@@ -20,11 +20,6 @@ public class RunAtStart {
 
     @PostConstruct
     public void runAtStart() {
-//        try {
-//            scrapers.get(1).scrapeProducts(Category.UNDERWEAR);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
         for (Scraper scraper : scrapers) {
             for (Category category : Category.values()) {
                 try {

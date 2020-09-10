@@ -9,7 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 @Controller
@@ -19,6 +21,20 @@ public class ProductController {
     @Autowired
     public ProductController(ProductRepository productRepository) {
         this.productRepository = productRepository;
+    }
+
+    @GetMapping
+    public String populateLandingPageWithRandomProducts(Model model) {
+        List<Product> products = productRepository.findAllById(generateRandomIds());
+        model.addAttribute("products", products);
+        return "index";
+    }
+
+    private List<Long> generateRandomIds() {
+        long[] longs = ThreadLocalRandom.current().longs(100, 1, productRepository.count()).toArray();
+        return Arrays.stream(longs)
+                .boxed()
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/allProducts")
@@ -42,7 +58,6 @@ public class ProductController {
                         .filter(p -> p.getBrand().toLowerCase().contains(productName.toLowerCase().trim())
                                 || p.getModel().toLowerCase().contains(productName.toLowerCase().trim()))
                         .collect(Collectors.toList());
-
         model.addAttribute("products", filteredProducts);
         return "index";
     }

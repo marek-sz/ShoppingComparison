@@ -48,12 +48,15 @@ public class MolieraScraper implements Scraper {
                 scrapeRegularPrice = row.select("div.product-list-item-regular-price").text();
                 scrapeSellPrice = row.select("div.product-list-item-sell-price").text();
                 currentPrice = checkCurrentPrice(scrapeRegularPrice, scrapeSellPrice);
+                Element image = row.select("img[src$=.jpg]").first();
                 Element link = row.select("a").first();
 
-                if (scrapeBrand.equals("") || scrapeModel.equals("") || currentPrice == null || link == null) {
+                if (scrapeBrand.equals("") || scrapeModel.equals("") || currentPrice == null || link == null || image == null) {
                     continue;
                 } else {
                     String absHref = link.attr("abs:href");
+                    String imageUrl = image.attr("data-src");
+
                     BigDecimal price = formatPrice(currentPrice);
 
                     Product product = new Product();
@@ -61,6 +64,7 @@ public class MolieraScraper implements Scraper {
                     product.setBrand(scrapeBrand);
                     product.setPrice(price);
                     product.setUrl(absHref);
+                    product.setImageUrl(imageUrl);
                     product.setCategory(category);
                     shop.addProduct(product);
                     productRepository.save(product);

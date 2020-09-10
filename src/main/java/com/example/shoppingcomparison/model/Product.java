@@ -16,6 +16,7 @@ public class Product {
     private String model;
     private BigDecimal price;
     private String url;
+    private String imageUrl;
 
     @Enumerated(EnumType.STRING)
     private Category category;
@@ -61,6 +62,14 @@ public class Product {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public Category getCategory() {

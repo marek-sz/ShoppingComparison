@@ -46,12 +46,14 @@ public class VitkacScraper implements Scraper {
                 String scrapeBrand = row.select("h4").text();
                 String scrapeModel = row.select("p").text();
                 String scrapePrice = row.select("label").text();
+                Element image = row.select("img.lazy.first").first();
                 Element link = row.select("a.box-click").first();
 
-                if (scrapeBrand.equals("") || scrapeModel.equals("") || scrapePrice.equals("") || link == null) {
+                if (scrapeBrand.equals("") || scrapeModel.equals("") || scrapePrice.equals("") || link == null || image == null) {
                     continue;
                 } else {
                     String absHref = link.attr("abs:href");
+                    String imageUrl = image.attr("data-src");
                     String scrapePriceFormatted = scrapePrice.substring(0, scrapePrice.indexOf('z')).replaceAll("\\s+", "").replaceAll(",", ".");
                     BigDecimal price = new BigDecimal(scrapePriceFormatted);
 
@@ -60,6 +62,7 @@ public class VitkacScraper implements Scraper {
                     product.setBrand(scrapeBrand);
                     product.setPrice(price);
                     product.setUrl(absHref);
+                    product.setImageUrl(imageUrl);
                     product.setCategory(category);
                     shop.addProduct(product);
                     productRepository.save(product);
