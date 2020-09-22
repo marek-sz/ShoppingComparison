@@ -20,6 +20,7 @@ import java.util.Map;
 public class MolieraScraper implements Scraper {
     private final ProductRepository productRepository;
     private final ShopRepository shopRepository;
+
     private URL homeUrl = new URL("https://www.moliera2.com");
     private Map<Category, String> categoryMap = new HashMap<>();
     // currency PLN
@@ -56,16 +57,17 @@ public class MolieraScraper implements Scraper {
                 } else {
                     String absHref = link.attr("abs:href");
                     String imageUrl = image.attr("data-src");
-
                     BigDecimal price = formatPrice(currentPrice);
 
-                    Product product = new Product();
-                    product.setModel(scrapeModel);
-                    product.setBrand(scrapeBrand);
-                    product.setPrice(price);
-                    product.setUrl(absHref);
-                    product.setImageUrl(imageUrl);
-                    product.setCategory(category);
+                    Product product = new Product.Builder()
+                            .model(scrapeModel)
+                            .brand(scrapeBrand)
+                            .price(price)
+                            .url(absHref)
+                            .imageUrl(imageUrl)
+                            .category(category)
+                            .build();
+
                     shop.addProduct(product);
                     productRepository.save(product);
                     System.out.println(product);
@@ -80,7 +82,6 @@ public class MolieraScraper implements Scraper {
         categoryMap.put(Category.UNDERWEAR, "/1/1/30/bielizna");
         categoryMap.put(Category.BLOUSE, "/1/1/35/t-shirty---koszule---bluzki");
         categoryMap.put(Category.SHOES, "/1/4/buty");
-        categoryMap.put(Category.JEANS, "/1/1/56/spodnie---jeansy---leginsy");
         categoryMap.put(Category.JEANS, "/1/1/56/spodnie---jeansy---leginsy");
         categoryMap.put(Category.DUNGAREE, "/1/1/126/kombinezony");
         categoryMap.put(Category.JACKETS, "/1/1/33/kurtki---plaszcze---parki");

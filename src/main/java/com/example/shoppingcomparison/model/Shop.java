@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Data
+//@Data
 public class Shop {
 
     @Id

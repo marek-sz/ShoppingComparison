@@ -2,18 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="47ca9193-f455-47a8-aa5e-9ac3e75bdda4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/img/photo_unavailble.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/static/img/photo_unavailble.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/example/shoppingcomparison/model/Product$Builder.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/shoppingcomparison/RunAtStart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/shoppingcomparison/RunAtStart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/shoppingcomparison/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/shoppingcomparison/controller/ProductController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/shoppingcomparison/model/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/shoppingcomparison/model/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/shoppingcomparison/model/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/shoppingcomparison/model/Shop.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/shoppingcomparison/scrappers/MolieraScraper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/shoppingcomparison/scrappers/MolieraScraper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/shoppingcomparison/scrappers/VitkacScraper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/shoppingcomparison/scrappers/VitkacScraper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/shopping-comparison.kotlin_module" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/shoppingcomparison/RunAtStart.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/shoppingcomparison/RunAtStart.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/shoppingcomparison/controller/ProductController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/shoppingcomparison/controller/ProductController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/shoppingcomparison/model/Product.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/shoppingcomparison/model/Product.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/shoppingcomparison/model/Shop.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/shoppingcomparison/model/Shop.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/shoppingcomparison/scrappers/MolieraScraper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/shoppingcomparison/scrappers/MolieraScraper.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/shoppingcomparison/scrappers/VitkacScraper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/shoppingcomparison/scrappers/VitkacScraper.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/index.html" afterDir="false" />
@@ -86,7 +86,7 @@
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../custom-repositories" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Wzorce-Projektowe" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="Settings.Markdown" />
@@ -218,7 +218,13 @@
       <workItem from="1599466656216" duration="18441000" />
       <workItem from="1599560092324" duration="8974000" />
       <workItem from="1599642108737" duration="17369000" />
-      <workItem from="1599726100782" duration="3054000" />
+      <workItem from="1599726100782" duration="5552000" />
+      <workItem from="1599735559834" duration="3000" />
+      <workItem from="1599816849079" duration="12289000" />
+      <workItem from="1599899342633" duration="569000" />
+      <workItem from="1599903788388" duration="1165000" />
+      <workItem from="1600675709675" duration="918000" />
+      <workItem from="1600756527144" duration="19239000" />
     </task>
     <task id="LOCAL-00001" summary="add products repository with sorting by price">
       <created>1592926487212</created>
@@ -261,6 +267,16 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="add products repository with sorting by price" />
@@ -295,10 +311,10 @@
       <screen x="-1200" y="-517" width="1200" height="1920" />
     </state>
     <state x="-961" y="129" key="#com.intellij.ide.fileTemplates.ui.ConfigureTemplatesDialog/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1593440148169" />
-    <state x="-831" y="143" key="#com.intellij.ide.util.MemberChooser" timestamp="1599567276673">
+    <state x="-831" y="143" key="#com.intellij.ide.util.MemberChooser" timestamp="1600788767469">
       <screen x="-1200" y="-517" width="1200" height="1920" />
     </state>
-    <state x="-831" y="143" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1599567276673" />
+    <state x="-831" y="143" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1600788767469" />
     <state x="590" y="361" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1050/-1200.-517.1200.1920@0.0.1920.1050" timestamp="1597242171197" />
     <state x="-920" y="178" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1595231746865">
       <screen x="-1200" y="-517" width="1200" height="1920" />
@@ -332,49 +348,49 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="60" y="43" width="1174" height="968" key="CommitChangelistDialog2/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1597676251112" />
-    <state x="-820" y="197" key="FileChooserDialogImpl" timestamp="1599726296991">
+    <state x="-820" y="197" key="FileChooserDialogImpl" timestamp="1600783419010">
       <screen x="-1200" y="-517" width="1200" height="1920" />
     </state>
-    <state x="-820" y="197" key="FileChooserDialogImpl/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1599726296991" />
-    <state width="1155" height="497" key="GridCell.Tab.0.bottom" timestamp="1599728907752">
+    <state x="-820" y="197" key="FileChooserDialogImpl/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1600783419010" />
+    <state width="1156" height="498" key="GridCell.Tab.0.bottom" timestamp="1600790162905">
       <screen x="-1200" y="-517" width="1200" height="1920" />
     </state>
-    <state width="1155" height="497" key="GridCell.Tab.0.bottom/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1599728907752" />
+    <state width="1156" height="498" key="GridCell.Tab.0.bottom/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1600790162905" />
     <state width="1876" height="541" key="GridCell.Tab.0.bottom/0.0.1920.1050/-1200.-517.1200.1920@0.0.1920.1050" timestamp="1597958166063" />
-    <state width="1155" height="497" key="GridCell.Tab.0.center" timestamp="1599728907752">
+    <state width="1156" height="498" key="GridCell.Tab.0.center" timestamp="1600790162905">
       <screen x="-1200" y="-517" width="1200" height="1920" />
     </state>
-    <state width="1155" height="497" key="GridCell.Tab.0.center/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1599728907752" />
+    <state width="1156" height="498" key="GridCell.Tab.0.center/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1600790162905" />
     <state width="1876" height="541" key="GridCell.Tab.0.center/0.0.1920.1050/-1200.-517.1200.1920@0.0.1920.1050" timestamp="1597958166063" />
-    <state width="1155" height="497" key="GridCell.Tab.0.left" timestamp="1599728907752">
+    <state width="1156" height="498" key="GridCell.Tab.0.left" timestamp="1600790162904">
       <screen x="-1200" y="-517" width="1200" height="1920" />
     </state>
-    <state width="1155" height="497" key="GridCell.Tab.0.left/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1599728907752" />
+    <state width="1156" height="498" key="GridCell.Tab.0.left/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1600790162904" />
     <state width="1876" height="541" key="GridCell.Tab.0.left/0.0.1920.1050/-1200.-517.1200.1920@0.0.1920.1050" timestamp="1597958166063" />
-    <state width="1155" height="497" key="GridCell.Tab.0.right" timestamp="1599728907752">
+    <state width="1156" height="498" key="GridCell.Tab.0.right" timestamp="1600790162905">
       <screen x="-1200" y="-517" width="1200" height="1920" />
     </state>
-    <state width="1155" height="497" key="GridCell.Tab.0.right/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1599728907752" />
+    <state width="1156" height="498" key="GridCell.Tab.0.right/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1600790162905" />
     <state width="1876" height="541" key="GridCell.Tab.0.right/0.0.1920.1050/-1200.-517.1200.1920@0.0.1920.1050" timestamp="1597958166063" />
-    <state width="1155" height="497" key="GridCell.Tab.1.bottom" timestamp="1599728907752">
+    <state width="1156" height="498" key="GridCell.Tab.1.bottom" timestamp="1600790162905">
       <screen x="-1200" y="-517" width="1200" height="1920" />
     </state>
-    <state width="1155" height="497" key="GridCell.Tab.1.bottom/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1599728907752" />
+    <state width="1156" height="498" key="GridCell.Tab.1.bottom/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1600790162905" />
     <state width="1876" height="541" key="GridCell.Tab.1.bottom/0.0.1920.1050/-1200.-517.1200.1920@0.0.1920.1050" timestamp="1597958166063" />
-    <state width="1155" height="497" key="GridCell.Tab.1.center" timestamp="1599728907752">
+    <state width="1156" height="498" key="GridCell.Tab.1.center" timestamp="1600790162905">
       <screen x="-1200" y="-517" width="1200" height="1920" />
     </state>
-    <state width="1155" height="497" key="GridCell.Tab.1.center/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1599728907752" />
+    <state width="1156" height="498" key="GridCell.Tab.1.center/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1600790162905" />
     <state width="1876" height="541" key="GridCell.Tab.1.center/0.0.1920.1050/-1200.-517.1200.1920@0.0.1920.1050" timestamp="1597958166063" />
-    <state width="1155" height="497" key="GridCell.Tab.1.left" timestamp="1599728907752">
+    <state width="1156" height="498" key="GridCell.Tab.1.left" timestamp="1600790162905">
       <screen x="-1200" y="-517" width="1200" height="1920" />
     </state>
-    <state width="1155" height="497" key="GridCell.Tab.1.left/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1599728907752" />
+    <state width="1156" height="498" key="GridCell.Tab.1.left/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1600790162905" />
     <state width="1876" height="541" key="GridCell.Tab.1.left/0.0.1920.1050/-1200.-517.1200.1920@0.0.1920.1050" timestamp="1597958166063" />
-    <state width="1155" height="497" key="GridCell.Tab.1.right" timestamp="1599728907752">
+    <state width="1156" height="498" key="GridCell.Tab.1.right" timestamp="1600790162905">
       <screen x="-1200" y="-517" width="1200" height="1920" />
     </state>
-    <state width="1155" height="497" key="GridCell.Tab.1.right/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1599728907752" />
+    <state width="1156" height="498" key="GridCell.Tab.1.right/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1600790162905" />
     <state width="1876" height="541" key="GridCell.Tab.1.right/0.0.1920.1050/-1200.-517.1200.1920@0.0.1920.1050" timestamp="1597958166063" />
     <state width="1155" height="503" key="GridCell.Tab.2.bottom" timestamp="1599669164676">
       <screen x="-1200" y="-517" width="1200" height="1920" />
@@ -401,26 +417,26 @@
     </state>
     <state x="-1099" y="74" key="SettingsEditor/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1599476000943" />
     <state x="162" y="312" key="SettingsEditor/0.0.1920.1050/-1200.-517.1200.1920@0.0.1920.1050" timestamp="1597958729714" />
-    <state x="-879" y="173" width="570" height="524" key="StructurePopup" timestamp="1599129239203">
+    <state x="-879" y="173" width="570" height="524" key="StructurePopup" timestamp="1600780445935">
       <screen x="-1200" y="-517" width="1200" height="1920" />
     </state>
-    <state x="-879" y="173" width="570" height="524" key="StructurePopup/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1599129239203" />
+    <state x="-879" y="173" width="570" height="524" key="StructurePopup/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1600780445935" />
     <state width="498" height="468" key="SwitcherDM" timestamp="1598802137054">
       <screen x="-1200" y="-517" width="1200" height="1920" />
     </state>
     <state width="498" height="468" key="SwitcherDM/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1598802137054" />
-    <state x="-849" y="225" key="Vcs.Push.Dialog.v2" timestamp="1597770013740">
+    <state x="-849" y="225" key="Vcs.Push.Dialog.v2" timestamp="1599729715326">
       <screen x="-1200" y="-517" width="1200" height="1920" />
     </state>
-    <state x="-849" y="225" key="Vcs.Push.Dialog.v2/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1597770013740" />
+    <state x="-849" y="225" key="Vcs.Push.Dialog.v2/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1599729715326" />
     <state x="-1108" y="-425" width="1016" height="1736" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1598892624225">
       <screen x="-1200" y="-517" width="1200" height="1920" />
     </state>
     <state x="-1108" y="-425" width="1016" height="1736" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1598892624225" />
-    <state x="-899" y="265" key="com.intellij.ide.util.TipDialog" timestamp="1597844383322">
+    <state x="-899" y="265" key="com.intellij.ide.util.TipDialog" timestamp="1600675719830">
       <screen x="-1200" y="-517" width="1200" height="1920" />
     </state>
-    <state x="-899" y="265" key="com.intellij.ide.util.TipDialog/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1597844383322" />
+    <state x="-899" y="265" key="com.intellij.ide.util.TipDialog/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1600675719830" />
     <state x="-791" y="359" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1599044997422">
       <screen x="-1200" y="-517" width="1200" height="1920" />
     </state>
@@ -437,19 +453,19 @@
       <screen x="-1200" y="-517" width="1200" height="1920" />
     </state>
     <state x="-658" y="512" key="extract.method.dialog/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1599668896324" />
-    <state x="-787" y="-133" width="606" height="1471" key="find.popup" timestamp="1599492193478">
+    <state x="-787" y="-133" width="619" height="1471" key="find.popup" timestamp="1600756841629">
       <screen x="-1200" y="-517" width="1200" height="1920" />
     </state>
-    <state x="-787" y="-133" width="606" height="1471" key="find.popup/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1599492193478" />
+    <state x="-787" y="-133" width="619" height="1471" key="find.popup/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1600756841629" />
     <state x="660" y="210" width="736" height="804" key="find.popup/0.0.1920.1050/-1200.-517.1200.1920@0.0.1920.1050" timestamp="1597958419974" />
     <state x="-1200" y="62" key="new project wizard" timestamp="1596631084363">
       <screen x="-1200" y="-517" width="1200" height="1920" />
     </state>
     <state x="-1200" y="62" key="new project wizard/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1596631084363" />
-    <state x="-937" y="-72" width="672" height="678" key="search.everywhere.popup" timestamp="1599655841210">
+    <state x="-937" y="-72" width="672" height="678" key="search.everywhere.popup" timestamp="1600761667611">
       <screen x="-1200" y="-517" width="1200" height="1920" />
     </state>
-    <state x="-937" y="-72" width="672" height="678" key="search.everywhere.popup/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1599655841210" />
+    <state x="-937" y="-72" width="672" height="678" key="search.everywhere.popup/0.0.1920.1050/-1200.-517.1200.1920@-1200.-517.1200.1920" timestamp="1600761667611" />
     <state x="421" y="243" width="1076" height="371" key="search.everywhere.popup/0.0.1920.1050/-1200.-517.1200.1920@0.0.1920.1050" timestamp="1597958711473" />
   </component>
   <component name="XDebuggerManager">

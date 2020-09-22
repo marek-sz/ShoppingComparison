@@ -24,6 +24,68 @@ public class Product {
     @ManyToOne
     private Shop shop;
 
+    public Product() {
+    }
+
+    public Product(final Builder builder) {
+        this.brand = builder.brand;
+        this.model = builder.model;
+        this.price = builder.price;
+        this.url = builder.url;
+        this.imageUrl = builder.imageUrl;
+        this.category = builder.category;
+        this.shop = builder.shop;
+    }
+
+    public static class Builder {
+        private String brand;
+        private String model;
+        private BigDecimal price;
+        private String url;
+        private String imageUrl;
+        private Category category;
+        private Shop shop;
+
+        public Builder brand(final String brand) {
+            this.brand = brand;
+            return this;
+        }
+
+        public Builder model(String model) {
+            this.model = model;
+            return this;
+        }
+
+        public Builder price(BigDecimal price) {
+            this.price = price;
+            return this;
+        }
+
+        public Builder url(String url) {
+            this.url = url;
+            return this;
+        }
+
+        public Builder imageUrl(String imageUrl) {
+            this.imageUrl = imageUrl;
+            return this;
+        }
+
+        public Builder category(Category category) {
+            this.category = category;
+            return this;
+        }
+
+        public Builder shop(Shop shop) {
+            this.shop = shop;
+            return this;
+        }
+
+        public Product build() {
+            return new Product(this);
+        }
+    }
+
     public long getId() {
         return id;
     }
@@ -87,5 +149,6 @@ public class Product {
     public void setShop(Shop shop) {
         this.shop = shop;
     }
+
 
 }

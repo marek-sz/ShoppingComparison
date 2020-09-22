@@ -18,6 +18,9 @@ public class RunAtStart {
         this.scrapers = scrapers;
     }
 
+//    int cpuCores = Runtime.getRuntime().availableProcessors();
+//    ExecutorService service = Executors.newFixedThreadPool(cpuCores);
+
     @PostConstruct
     public void runAtStart() {
         for (Scraper scraper : scrapers) {

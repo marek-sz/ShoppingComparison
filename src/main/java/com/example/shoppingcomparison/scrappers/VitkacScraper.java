@@ -5,7 +5,6 @@ import com.example.shoppingcomparison.model.Product;
 import com.example.shoppingcomparison.model.Shop;
 import com.example.shoppingcomparison.repository.ProductRepository;
 import com.example.shoppingcomparison.repository.ShopRepository;
-import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -57,13 +56,15 @@ public class VitkacScraper implements Scraper {
                     String scrapePriceFormatted = scrapePrice.substring(0, scrapePrice.indexOf('z')).replaceAll("\\s+", "").replaceAll(",", ".");
                     BigDecimal price = new BigDecimal(scrapePriceFormatted);
 
-                    Product product = new Product();
-                    product.setModel(scrapeModel);
-                    product.setBrand(scrapeBrand);
-                    product.setPrice(price);
-                    product.setUrl(absHref);
-                    product.setImageUrl(imageUrl);
-                    product.setCategory(category);
+                    Product product = new Product.Builder()
+                            .model(scrapeModel)
+                            .brand(scrapeBrand)
+                            .price(price)
+                            .url(absHref)
+                            .imageUrl(imageUrl)
+                            .category(category)
+                            .build();
+
                     shop.addProduct(product);
                     productRepository.save(product);
                     System.out.println(product);
