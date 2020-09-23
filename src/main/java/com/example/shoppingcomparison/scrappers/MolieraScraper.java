@@ -8,26 +8,24 @@ import com.example.shoppingcomparison.repository.ShopRepository;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class MolieraScraper implements Scraper {
-    private final ProductRepository productRepository;
-    private final ShopRepository shopRepository;
-
+public class MolieraScraper extends AbstractScraper {
     private URL homeUrl = new URL("https://www.moliera2.com");
     private Map<Category, String> categoryMap = new HashMap<>();
-    // currency PLN
 
-    public MolieraScraper(ProductRepository productRepository, ShopRepository shopRepository) throws IOException {
-        this.productRepository = productRepository;
-        this.shopRepository = shopRepository;
+    @Autowired
+    protected MolieraScraper(ProductRepository productRepository, ShopRepository shopRepository) throws MalformedURLException {
+        super(productRepository, shopRepository);
     }
 
     public void scrapeProducts(Category category) throws IOException {

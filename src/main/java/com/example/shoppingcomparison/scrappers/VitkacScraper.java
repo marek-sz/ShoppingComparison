@@ -8,6 +8,7 @@ import com.example.shoppingcomparison.repository.ShopRepository;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -18,17 +19,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class VitkacScraper implements Scraper {
-    private final ProductRepository productRepository;
-    private final ShopRepository shopRepository;
-
+public class VitkacScraper extends AbstractScraper {
     private URL homeUrl = new URL("https://www.vitkac.com");
     private Map<Category, String> categoryMap = new HashMap<>();
-    // currency PLN
 
+    @Autowired
     public VitkacScraper(ProductRepository productRepository, ShopRepository shopRepository) throws IOException {
-        this.productRepository = productRepository;
-        this.shopRepository = shopRepository;
+        super(productRepository, shopRepository);
     }
 
     public void scrapeProducts(Category category) throws IOException {
