@@ -14,17 +14,21 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Service
 public class VitkacScraper extends AbstractScraper {
     private URL homeUrl = new URL("https://www.vitkac.com");
     private Map<Category, String> categoryMap = new HashMap<>();
+    private Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     @Autowired
-    public VitkacScraper(ProductRepository productRepository, ShopRepository shopRepository) throws IOException {
+    public VitkacScraper(ProductRepository productRepository, ShopRepository shopRepository) throws MalformedURLException {
         super(productRepository, shopRepository);
     }
 
@@ -64,7 +68,6 @@ public class VitkacScraper extends AbstractScraper {
 
                     shop.addProduct(product);
                     productRepository.save(product);
-                    System.out.println(product);
                 }
             }
 
@@ -82,7 +85,7 @@ public class VitkacScraper extends AbstractScraper {
         try {
             nextUrl = page.select("span#offsets_top.dropdown.na-stronie > a.small").last().attr("abs:href");
         } catch (NullPointerException e) {
-            e.printStackTrace();
+            logger.log(Level.INFO, "End of pagination on " + page.baseUri());
         }
         return nextUrl;
     }

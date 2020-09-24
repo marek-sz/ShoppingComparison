@@ -17,6 +17,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 @Service
 public class MolieraScraper extends AbstractScraper {
@@ -68,7 +69,6 @@ public class MolieraScraper extends AbstractScraper {
 
                     shop.addProduct(product);
                     productRepository.save(product);
-                    System.out.println(product);
                 }
             }
             url = nextUrl;

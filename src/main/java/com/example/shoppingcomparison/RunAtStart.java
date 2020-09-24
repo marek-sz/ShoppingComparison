@@ -8,10 +8,13 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Component
 public class RunAtStart {
     private List<Scraper> scrapers;
+    private Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     @Autowired
     public RunAtStart(List<Scraper> scrapers) {
@@ -28,10 +31,9 @@ public class RunAtStart {
                 try {
                     scraper.scrapeProducts(category);
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    logger.log(Level.INFO, "Category " + category + " is not defined for " + scraper.getClass().getSimpleName());
                 }
             }
         }
     }
 }
-
