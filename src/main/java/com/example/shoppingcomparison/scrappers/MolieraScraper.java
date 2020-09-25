@@ -17,12 +17,14 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Service
 public class MolieraScraper extends AbstractScraper {
     private URL homeUrl = new URL("https://www.moliera2.com");
     private Map<Category, String> categoryMap = new HashMap<>();
+    private Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     @Autowired
     protected MolieraScraper(ProductRepository productRepository, ShopRepository shopRepository) throws MalformedURLException {
@@ -32,7 +34,7 @@ public class MolieraScraper extends AbstractScraper {
     public void scrapeProducts(Category category) throws IOException {
         Shop shop = new Shop("Moliera");
         shopRepository.save(shop);
-
+        logger.log(Level.INFO, "Scraping " + category + " from " + shop.getShopName());
         populateMap();
 
         String url = new URL(homeUrl, categoryMap.get(category)).toString();
@@ -75,19 +77,6 @@ public class MolieraScraper extends AbstractScraper {
         }
     }
 
-    private void populateMap() {
-        categoryMap.put(Category.ACCESSORIES, "/1/2/dodatki");
-        categoryMap.put(Category.UNDERWEAR, "/1/1/30/bielizna");
-        categoryMap.put(Category.BLOUSE, "/1/1/35/t-shirty---koszule---bluzki");
-        categoryMap.put(Category.SHOES, "/1/4/buty");
-        categoryMap.put(Category.JEANS, "/1/1/56/spodnie---jeansy---leginsy");
-        categoryMap.put(Category.DUNGAREE, "/1/1/126/kombinezony");
-        categoryMap.put(Category.JACKETS, "/1/1/33/kurtki---plaszcze---parki");
-        categoryMap.put(Category.DRESS_JACKETS, "/1/1/37/marynarki---kamizelki");
-        categoryMap.put(Category.SHORTS, "/1/1/38/spodenki");
-        categoryMap.put(Category.PURSES, "/1/3/torby");
-    }
-
     private String checkCurrentPrice(String regularPrice, String sellPrice) {
         if (!regularPrice.isEmpty()) {
             return regularPrice;
@@ -101,5 +90,18 @@ public class MolieraScraper extends AbstractScraper {
     private BigDecimal formatPrice(String currentPrice) {
         String currentPriceFormatted = currentPrice.substring(0, currentPrice.indexOf('z')).replaceAll("\\s+", "");
         return new BigDecimal(currentPriceFormatted);
+    }
+
+    private void populateMap() {
+        categoryMap.put(Category.ACCESSORIES, "/1/2/dodatki");
+        categoryMap.put(Category.UNDERWEAR, "/1/1/30/bielizna");
+        categoryMap.put(Category.BLOUSE, "/1/1/35/t-shirty---koszule---bluzki");
+        categoryMap.put(Category.SHOES, "/1/4/buty");
+        categoryMap.put(Category.JEANS, "/1/1/56/spodnie---jeansy---leginsy");
+        categoryMap.put(Category.DUNGAREE, "/1/1/126/kombinezony");
+        categoryMap.put(Category.JACKETS, "/1/1/33/kurtki---plaszcze---parki");
+        categoryMap.put(Category.DRESS_JACKETS, "/1/1/37/marynarki---kamizelki");
+        categoryMap.put(Category.SHORTS, "/1/1/38/spodenki");
+        categoryMap.put(Category.PURSES, "/1/3/torby");
     }
 }

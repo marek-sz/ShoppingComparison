@@ -114,10 +114,6 @@ public class Product {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
     public String getUrl() {
         return url;
     }
@@ -130,25 +126,13 @@ public class Product {
         return imageUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
 
     public Category getCategory() {
         return category;
     }
 
-    public void setCategory(Category type) {
-        this.category = type;
-    }
-
-    public Shop getShop() {
-        return shop;
-    }
-
     public void setShop(Shop shop) {
         this.shop = shop;
     }
-
 
 }

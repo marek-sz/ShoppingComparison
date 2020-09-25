@@ -42,18 +42,6 @@ public class Shop {
         return shopName;
     }
 
-    public void setShopName(String shopName) {
-        this.shopName = shopName;
-    }
-
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
-
     @Override
     public String toString() {
         return shopName;

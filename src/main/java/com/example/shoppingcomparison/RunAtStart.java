@@ -31,7 +31,7 @@ public class RunAtStart {
                 try {
                     scraper.scrapeProducts(category);
                 } catch (IOException e) {
-                    logger.log(Level.INFO, "Category " + category + " is not defined for " + scraper.getClass().getSimpleName());
+                    logger.log(Level.WARNING, "Category " + category + " is not defined for " + scraper.getClass().getSimpleName());
                 }
             }
         }

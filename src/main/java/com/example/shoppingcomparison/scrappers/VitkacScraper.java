@@ -35,12 +35,12 @@ public class VitkacScraper extends AbstractScraper {
     public void scrapeProducts(Category category) throws IOException {
         Shop shop = new Shop("Vitkac");
         shopRepository.save(shop);
-
         populateMap();
+        logger.log(Level.INFO, "Scraping " + category + " from " + shop.getShopName());
 
         String url = new URL(homeUrl, categoryMap.get(category)).toString();
 
-        while (!url.isEmpty() && getHttpResponseStatusCode(url) == 200) {
+        while (doesUrlExist(url)) {
             Document page = Jsoup.connect(url).get();
             for (Element row : page.select("article#productList div")) {
                 String scrapeBrand = row.select("h4").text();
@@ -54,8 +54,7 @@ public class VitkacScraper extends AbstractScraper {
                 } else {
                     String absHref = link.attr("abs:href");
                     String imageUrl = image.attr("data-src");
-                    String scrapePriceFormatted = scrapePrice.substring(0, scrapePrice.indexOf('z')).replaceAll("\\s+", "").replaceAll(",", ".");
-                    BigDecimal price = new BigDecimal(scrapePriceFormatted);
+                    BigDecimal price = formatPrice(scrapePrice);
 
                     Product product = new Product.Builder()
                             .model(scrapeModel)
@@ -80,6 +79,10 @@ public class VitkacScraper extends AbstractScraper {
         }
     }
 
+    private boolean doesUrlExist(String url) throws IOException {
+        return !url.isEmpty() && getHttpResponseStatusCode(url) == 200;
+    }
+
     private String returnNextUrlIfExist(Document page) throws NullPointerException {
         String nextUrl = null;
         try {
@@ -88,6 +91,19 @@ public class VitkacScraper extends AbstractScraper {
             logger.log(Level.INFO, "End of pagination on " + page.baseUri());
         }
         return nextUrl;
+    }
+
+    private int getHttpResponseStatusCode(String url) throws IOException {
+        URL url1 = new URL(url);
+        HttpURLConnection connection = (HttpURLConnection) url1.openConnection();
+        connection.setRequestMethod("POST");
+        connection.connect();
+        return connection.getResponseCode();
+    }
+
+    private BigDecimal formatPrice(String scrapePrice) {
+        String currentPriceFormatted = scrapePrice.substring(0, scrapePrice.indexOf('z')).replaceAll("\\s+", "").replaceAll(",", ".");
+        return new BigDecimal(currentPriceFormatted);
     }
 
     private void populateMap() {
@@ -101,13 +117,5 @@ public class VitkacScraper extends AbstractScraper {
         categoryMap.put(Category.COATS, "/pl/sklep/kobiety/plaszcze-1");
         categoryMap.put(Category.SHORTS, "/pl/sklep/kobiety/spodnie-1");
         categoryMap.put(Category.PURSES, "/pl/sklep/kobiety/torby-2");
-    }
-
-    private int getHttpResponseStatusCode(String url) throws IOException {
-        URL url1 = new URL(url);
-        HttpURLConnection connection = (HttpURLConnection) url1.openConnection();
-        connection.setRequestMethod("POST");
-        connection.connect();
-        return connection.getResponseCode();
     }
 }
