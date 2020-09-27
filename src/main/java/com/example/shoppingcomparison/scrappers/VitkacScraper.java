@@ -80,7 +80,7 @@ public class VitkacScraper extends AbstractScraper {
     }
 
     private boolean doesUrlExist(String url) throws IOException {
-        return !url.isEmpty() && getHttpResponseStatusCode(url) == 200;
+        return !url.isEmpty() && getHttpResponseStatus(url);
     }
 
     private String returnNextUrlIfExist(Document page) throws NullPointerException {
@@ -93,12 +93,13 @@ public class VitkacScraper extends AbstractScraper {
         return nextUrl;
     }
 
-    private int getHttpResponseStatusCode(String url) throws IOException {
+    private boolean getHttpResponseStatus(String url) throws IOException {
         URL url1 = new URL(url);
         HttpURLConnection connection = (HttpURLConnection) url1.openConnection();
         connection.setRequestMethod("POST");
         connection.connect();
-        return connection.getResponseCode();
+        String responseMessage = connection.getResponseMessage();
+        return responseMessage.equals("OK");
     }
 
     private BigDecimal formatPrice(String scrapePrice) {

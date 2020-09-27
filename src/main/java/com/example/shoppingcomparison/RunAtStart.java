@@ -26,14 +26,19 @@ public class RunAtStart {
 
     @PostConstruct
     public void runAtStart() {
-        for (Scraper scraper : scrapers) {
-            for (Category category : Category.values()) {
-                try {
-                    scraper.scrapeProducts(category);
-                } catch (IOException e) {
-                    logger.log(Level.WARNING, "Category " + category + " is not defined for " + scraper.getClass().getSimpleName());
-                }
-            }
+        try {
+            scrapers.get(0).scrapeProducts(Category.JACKETS);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+//        for (Scraper scraper : scrapers) {
+//            for (Category category : Category.values()) {
+//                try {
+//                    scraper.scrapeProducts(category);
+//                } catch (IOException e) {
+//                    logger.log(Level.WARNING, "Category " + category + " is not defined for " + scraper.getClass().getSimpleName());
+//                }
+//            }
+//        }
     }
 }
