@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Component
@@ -21,19 +20,21 @@ public class RunAtStart {
         this.scrapers = scrapers;
     }
 
-//    int cpuCores = Runtime.getRuntime().availableProcessors();
-//    ExecutorService service = Executors.newFixedThreadPool(cpuCores);
-
     @PostConstruct
-    public void runAtStart() {
-        for (Scraper scraper : scrapers) {
-            for (Category category : Category.values()) {
-                try {
-                    scraper.scrapeProducts(category);
-                } catch (IOException e) {
-                    logger.log(Level.WARNING, "Category " + category + " is not defined for " + scraper.getClass().getSimpleName());
-                }
-            }
+    public void runAtStart() throws IOException {
+        for (Category category : Category.values()) {
+            scrapers.get(1).scrapeProducts(category);
         }
+
+//        for (Scraper scraper : scrapers) {
+//            for (Category category : Category.values()) {
+//                try {
+//                    scraper.scrapeProducts(category);
+//                } catch (IOException e) {
+//                    logger.log(Level.WARNING, "Category " + category + " is not defined for " + scraper.getClass().getSimpleName());
+//                }
+//            }
+//        }
+//    }
     }
 }

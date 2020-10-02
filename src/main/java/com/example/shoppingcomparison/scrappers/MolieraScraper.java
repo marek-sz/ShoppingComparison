@@ -31,6 +31,7 @@ public class MolieraScraper extends AbstractScraper {
         super(productRepository, shopRepository);
     }
 
+    @Override
     public void scrapeProducts(Category category) throws IOException {
         Shop shop = new Shop("Moliera");
         shopRepository.save(shop);

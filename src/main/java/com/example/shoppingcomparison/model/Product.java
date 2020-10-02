@@ -1,6 +1,7 @@
 package com.example.shoppingcomparison.model;
 
 import lombok.Data;
+import org.springframework.scheduling.annotation.Async;
 
 import javax.persistence.*;
 import java.math.BigDecimal;

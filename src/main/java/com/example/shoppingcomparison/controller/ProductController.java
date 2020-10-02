@@ -23,7 +23,7 @@ public class ProductController {
         this.productRepository = productRepository;
     }
 
-    @GetMapping
+    @GetMapping("/index")
     public String populateLandingPageWithRandomProducts(Model model) {
         List<Product> products = productRepository.findAllById(generateRandomIds());
         model.addAttribute("products", products);
