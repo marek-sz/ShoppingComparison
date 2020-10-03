@@ -30,6 +30,7 @@ public class NetAPorterScraper extends AbstractScraper {
         super(productRepository, shopRepository);
     }
 
+    @Async
     @Override
     public void scrapeProducts(Category category) throws IOException {
         Shop shop = new Shop("Net A Porter");
@@ -67,19 +68,6 @@ public class NetAPorterScraper extends AbstractScraper {
         }
     }
 
-    private boolean fieldIsEmpty(String scrapeModel, String scrapeBrand, String currentPrice, String imageSrc, String absHref) {
-        return scrapeModel.isEmpty() || scrapeBrand.isEmpty() || currentPrice.isEmpty() || imageSrc.isEmpty() || absHref.isEmpty();
-    }
-
-    private String returnNextUrlIfExist(String url) {
-        String nextUrl = null;
-        try {
-            nextUrl = Jsoup.connect(url).get().select("a.Pagination7__next").attr("abs:href");
-        } catch (IOException e) {
-            logger.log(Level.INFO, "End of pagination on " + url);
-        }
-        return nextUrl;
-    }
 
     @Async
     CompletableFuture<Product> saveOneProduct(String scrapeModel, String scrapeBrand, BigDecimal price, String
@@ -93,8 +81,25 @@ public class NetAPorterScraper extends AbstractScraper {
                 .category(category)
                 .build();
         productRepository.save(product);
-        logger.log(Level.INFO, product.toString());
         return CompletableFuture.completedFuture(product);
+    }
+
+    private boolean fieldIsEmpty(String scrapeModel, String scrapeBrand, String currentPrice, String imageSrc, String absHref) {
+        return scrapeModel.isEmpty() || scrapeBrand.isEmpty() || currentPrice.isEmpty() || imageSrc.isEmpty() || absHref.isEmpty();
+    }
+
+    private boolean doesUrlExist(String url) {
+        return !url.isEmpty();
+    }
+
+    private String returnNextUrlIfExist(String url) {
+        String nextUrl = null;
+        try {
+            nextUrl = Jsoup.connect(url).get().select("a.Pagination7__next").attr("abs:href");
+        } catch (IOException e) {
+            logger.log(Level.INFO, "End of pagination on " + url);
+        }
+        return nextUrl;
     }
 
     private String checkCurrentPrice(String regularPrice, String sellPrice) {
@@ -110,10 +115,6 @@ public class NetAPorterScraper extends AbstractScraper {
     private BigDecimal formatPrice(String currentPrice) {
         String currentPriceFormatted = currentPrice.replace("€", "").replaceAll(",", ".");
         return new BigDecimal(currentPriceFormatted);
-    }
-
-    private boolean doesUrlExist(String url) {
-        return !url.isEmpty();
     }
 
     private void populateMap() {
