@@ -64,7 +64,6 @@ public class NetAPorterScraper extends AbstractScraper {
             } else {
                 url = nextUrl;
             }
-
         }
     }
 

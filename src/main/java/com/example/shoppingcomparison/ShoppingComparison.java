@@ -3,10 +3,9 @@ package com.example.shoppingcomparison;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-
-import java.util.concurrent.Executor;
 
 @SpringBootApplication
 @EnableAsync
@@ -18,7 +17,7 @@ public class ShoppingComparison {
     int cpuCores = Runtime.getRuntime().availableProcessors();
 
     @Bean
-    public Executor taskExecutor() {
+    public TaskExecutor taskExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(cpuCores);
         executor.setQueueCapacity(1000);
