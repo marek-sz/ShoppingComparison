@@ -14,30 +14,24 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.MalformedURLException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.CompletableFuture;
+import java.net.URL;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @Service
 public class NetAPorterScraper extends AbstractScraper {
-    private Map<Category, String> categoryMap = new HashMap<>();
-    private Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
-    //currency E
+    Shop shop = shopRepository.save(new Shop("Net A Porter"));
 
     protected NetAPorterScraper(ProductRepository productRepository, ShopRepository shopRepository) throws MalformedURLException {
         super(productRepository, shopRepository);
+        this.homeUrl = new URL("https://www.net-a-porter.com");
     }
+    //currency E
 
     @Async
     @Override
     public void scrapeProducts(Category category) throws IOException {
-        Shop shop = new Shop("Net A Porter");
-        shopRepository.save(shop);
-        populateMap();
-        logger.log(Level.INFO, "Scraping " + category + " from " + shop.getShopName());
-        String url = String.format("https://www.net-a-porter.com/%s", categoryMap.get(category));
+//        String url = String.format("https://www.net-a-porter.com/%s", categoryMap.get(category));
+        String url = formProperUrlFromCategoryMap(category);
 
         while (doesUrlExist(url)) {
             Document page = Jsoup.connect(url).get();
@@ -55,7 +49,7 @@ public class NetAPorterScraper extends AbstractScraper {
                     continue;
                 } else {
                     BigDecimal price = formatPrice(currentPrice);
-                    saveOneProduct(scrapeModel, scrapeBrand, price, absHref, imageSrc, category);
+                    saveOneProduct(scrapeModel, scrapeBrand, price, absHref, imageSrc, category, shop);
                 }
             }
 
@@ -68,10 +62,9 @@ public class NetAPorterScraper extends AbstractScraper {
         }
     }
 
-
     @Async
-    CompletableFuture<Product> saveOneProduct(String scrapeModel, String scrapeBrand, BigDecimal price, String
-            absHref, String imageUrl, Category category) {
+    void saveOneProduct(String scrapeModel, String scrapeBrand, BigDecimal price, String
+            absHref, String imageUrl, Category category, Shop shop) {
         Product product = new Product.Builder()
                 .model(scrapeModel)
                 .brand(scrapeBrand)
@@ -79,9 +72,9 @@ public class NetAPorterScraper extends AbstractScraper {
                 .url(absHref)
                 .imageUrl(imageUrl)
                 .category(category)
+                .shop(shop)
                 .build();
         productRepository.save(product);
-        return CompletableFuture.completedFuture(product);
     }
 
     private boolean fieldIsEmpty(String scrapeModel, String scrapeBrand, String currentPrice, String imageSrc, String absHref) {
@@ -89,7 +82,7 @@ public class NetAPorterScraper extends AbstractScraper {
     }
 
     private boolean doesUrlExist(String url) {
-        return !url.isEmpty();
+        return url != null || !url.isEmpty();
     }
 
     private String returnNextUrlIfExist(String url) {
@@ -117,7 +110,18 @@ public class NetAPorterScraper extends AbstractScraper {
         return new BigDecimal(currentPriceFormatted);
     }
 
-    private void populateMap() {
+    public String formProperUrlFromCategoryMap(Category category) {
+        String url = null;
+        try {
+            url = new URL(homeUrl, categoryMap.get(category)).toString();
+            logger.log(Level.INFO, "Scraping " + category + " from " + shop.getShopName());
+        } catch (IOException e) {
+            logger.log(Level.WARNING, "Category " + category + " is not defined for " + this.getClass().getSimpleName());
+        }
+        return url;
+    }
+
+    public void populateMap() {
         categoryMap.put(Category.ACCESSORIES, "/en-pl/shop/accessories?cm_sp=topnav-_-accessories-_-topbar");
         categoryMap.put(Category.UNDERWEAR, "/en-pl/shop/lingerie?cm_sp=topnav-_-lingerie-_-alllingerie");
         categoryMap.put(Category.BLOUSE, "/en-pl/shop/clothing/tops/blouses?cm_sp=topnav-_-clothing-_-blouses&dScroll=0&image_view=product&npp=60");
@@ -129,4 +133,6 @@ public class NetAPorterScraper extends AbstractScraper {
         categoryMap.put(Category.TROUSERS, "/en-pl/shop/clothing/pants?cm_sp=topnav-_-clothing-_-pants");
         categoryMap.put(Category.PURSES, "/en-pl/shop/bags?cm_sp=topnav-_-bags-_-allbags");
     }
+
+
 }

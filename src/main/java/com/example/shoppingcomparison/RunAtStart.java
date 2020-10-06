@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,6 +30,7 @@ public class RunAtStart {
     public void executeAsynchronously() {
         taskExecutor.execute(() -> {
             for (Scraper scraper : scrapers) {
+                scraper.populateMap();
                 for (Category category : Category.values()) {
                     try {
                         scraper.scrapeProducts(category);

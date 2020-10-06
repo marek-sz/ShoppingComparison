@@ -8,7 +8,6 @@ import com.example.shoppingcomparison.repository.ShopRepository;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -16,33 +15,22 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @Service
 public class MolieraScraper extends AbstractScraper {
-    private URL homeUrl = new URL("https://www.moliera2.com");
-    private Map<Category, String> categoryMap = new HashMap<>();
-    private Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    Shop shop = shopRepository.save(new Shop("Moliera"));
 
-    @Autowired
     protected MolieraScraper(ProductRepository productRepository, ShopRepository shopRepository) throws MalformedURLException {
         super(productRepository, shopRepository);
+        this.homeUrl = new URL("https://www.moliera2.com");
     }
 
     @Async
     @Override
     public void scrapeProducts(Category category) throws IOException {
-        Shop shop = new Shop("Moliera");
-        shopRepository.save(shop);
-        logger.log(Level.INFO, "Scraping " + category + " from " + shop.getShopName());
-        populateMap();
-
-        String url = new URL(homeUrl, categoryMap.get(category)).toString();
-
-        while (!url.isEmpty()) {
+        String url = formProperUrlFromCategoryMap(category);
+        while (!url.isEmpty() || url != null) {
             Document page = Jsoup.connect(url).get();
             String nextUrl = page.select("ul.pagination > li.next > a").attr("abs:href");
 
@@ -70,9 +58,9 @@ public class MolieraScraper extends AbstractScraper {
                             .url(absHref)
                             .imageUrl(imageUrl)
                             .category(category)
+                            .shop(shop)
                             .build();
 
-                    shop.addProduct(product);
                     productRepository.save(product);
                 }
             }
@@ -95,7 +83,18 @@ public class MolieraScraper extends AbstractScraper {
         return new BigDecimal(currentPriceFormatted);
     }
 
-    private void populateMap() {
+    public String formProperUrlFromCategoryMap(Category category) {
+        String url = null;
+        try {
+            url = new URL(homeUrl, categoryMap.get(category)).toString();
+            logger.log(Level.INFO, "Scraping " + category + " from " + shop.getShopName());
+        } catch (IOException e) {
+            logger.log(Level.WARNING, "Category " + category + " is not defined for " + this.getClass().getSimpleName());
+        }
+        return url;
+    }
+
+    public void populateMap() {
         categoryMap.put(Category.ACCESSORIES, "/1/2/dodatki");
         categoryMap.put(Category.UNDERWEAR, "/1/1/30/bielizna");
         categoryMap.put(Category.BLOUSE, "/1/1/35/t-shirty---koszule---bluzki");

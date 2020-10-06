@@ -17,27 +17,20 @@ import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @Service
 public class VitkacScraper extends AbstractScraper {
-    private URL homeUrl = new URL("https://www.vitkac.com");
-    private Map<Category, String> categoryMap = new HashMap<>();
-    private Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    Shop shop = shopRepository.save(new Shop("Vitkac"));
 
     @Autowired
     public VitkacScraper(ProductRepository productRepository, ShopRepository shopRepository) throws MalformedURLException {
         super(productRepository, shopRepository);
+        this.homeUrl = new URL("https://www.vitkac.com");
     }
 
     @Async
     public void scrapeProducts(Category category) throws IOException {
-        Shop shop = new Shop("Vitkac");
-        shopRepository.save(shop);
-        populateMap();
         logger.log(Level.INFO, "Scraping " + category + " from " + shop.getShopName());
 
         String url = new URL(homeUrl, categoryMap.get(category)).toString();
@@ -65,9 +58,9 @@ public class VitkacScraper extends AbstractScraper {
                             .url(absHref)
                             .imageUrl(imageUrl)
                             .category(category)
+                            .shop(shop)
                             .build();
 
-                    shop.addProduct(product);
                     productRepository.save(product);
                 }
             }
@@ -109,7 +102,7 @@ public class VitkacScraper extends AbstractScraper {
         return new BigDecimal(currentPriceFormatted);
     }
 
-    private void populateMap() {
+    public void populateMap() {
         categoryMap.put(Category.ACCESSORIES, "/pl/sklep/kobiety/akcesoria-2");
         categoryMap.put(Category.UNDERWEAR, "/pl/sklep/kobiety/bielizna-skarpety-1");
         categoryMap.put(Category.SHOES, "/pl/sklep/kobiety/buty-1");
@@ -121,4 +114,5 @@ public class VitkacScraper extends AbstractScraper {
         categoryMap.put(Category.SHORTS, "/pl/sklep/kobiety/spodnie-1");
         categoryMap.put(Category.PURSES, "/pl/sklep/kobiety/torby-2");
     }
+
 }

@@ -6,4 +6,5 @@ import java.io.IOException;
 
 public interface Scraper {
     void scrapeProducts(Category category) throws IOException;
+    void populateMap();
 }
