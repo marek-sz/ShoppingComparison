@@ -1,7 +1,6 @@
 package com.example.shoppingcomparison.scrappers;
 
 import com.example.shoppingcomparison.model.Category;
-import com.example.shoppingcomparison.model.Shop;
 import com.example.shoppingcomparison.repository.ProductRepository;
 import com.example.shoppingcomparison.repository.ShopRepository;
 
@@ -13,7 +12,7 @@ import java.util.logging.Logger;
 public abstract class AbstractScraper implements Scraper {
     protected final ProductRepository productRepository;
     protected final ShopRepository shopRepository;
-    protected Logger logger = Logger.getLogger(this.getClass().getSimpleName());
+    protected final Logger logger = Logger.getLogger(this.getClass().getSimpleName());
     protected Map<Category, String> categoryMap = new HashMap<>();
     protected URL homeUrl;
 
