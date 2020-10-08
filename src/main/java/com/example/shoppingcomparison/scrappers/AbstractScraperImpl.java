@@ -18,8 +18,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Arrays;
-import java.util.Objects;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.stream.Stream;
 
@@ -44,15 +43,36 @@ public class AbstractScraperImpl extends AbstractScraper {
     public void scrapeByCategory(Category category) {
         String categoryBaseUrl = homeUrl + categoryMap.get(category);
         logger.log(Level.INFO, "Scraping " + category + " from " + shop.getShopName());
-        try {
-            Document page = Jsoup.connect(categoryBaseUrl).get();
-            scrapeOnePage(page, category);
-        } catch (IOException e) {
-            logger.log(Level.WARNING, "Unable to establish connection with " + categoryBaseUrl);
-        }
+        scrapeOnePage(categoryBaseUrl, category);
     }
 
-    private void scrapeOnePage(Document page, Category category) {
+// without async
+    public List<String> collectAllUrlsForCategory(String categoryBaseUrl) {
+        List<String> urls = new ArrayList<>();
+        String url = categoryBaseUrl;
+        while (!url.isEmpty()) {
+            try {
+                Document page = Jsoup.connect(url).get();
+                String nextUrl = page.select("ul.pagination > li.next > a").attr("abs:href");
+                url = nextUrl;
+                System.out.println(url);
+                urls.add(nextUrl);
+            } catch (IOException e) {
+                logger.log(Level.WARNING, "Unable to establish connection with  " + categoryBaseUrl);
+            }
+        }
+        return urls;
+    }
+
+    private void scrapeOnePage(String categoryBaseUrl, Category category) {
+        String url = categoryBaseUrl;
+        Document page = null;
+        try {
+            page = Jsoup.connect(url).get();
+        } catch (IOException e) {
+            logger.log(Level.WARNING, "Unable to establish connection with  " + categoryBaseUrl);
+        }
+
         Elements elements = page.select("div#product-list div");
         for (Element element : elements) {
             String scrapeBrand, scrapeModel, scrapeRegularPrice, scrapeSellPrice, currentPrice;
@@ -71,12 +91,6 @@ public class AbstractScraperImpl extends AbstractScraper {
                 saveSingleProduct(scrapeModel, scrapeBrand, price, absHref, imageUrl, category, shop);
             }
         }
-        scrapeNextPage(page);
-    }
-
-    private void scrapeNextPage(Document page) {
-        String nextUrl = page.select("ul.pagination > li.next > a").attr("abs:href");
-
     }
 
     private void saveSingleProduct(String scrapeModel, String scrapeBrand, BigDecimal price, String
