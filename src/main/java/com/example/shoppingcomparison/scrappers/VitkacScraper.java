@@ -74,6 +74,11 @@ public class VitkacScraper extends AbstractScraper {
         }
     }
 
+    @Override
+    public void scrapeEntireShop() {
+
+    }
+
     private boolean doesUrlExist(String url) throws IOException {
         return !url.isEmpty() && getHttpResponseStatus(url);
     }

@@ -27,7 +27,6 @@ public class MolieraScraper extends AbstractScraper {
     }
 
     @Async
-    @Override
     public void scrapeProducts(Category category) throws IOException {
         String url = formProperUrlFromCategoryMap(category);
         while (!url.isEmpty() || url != null) {
@@ -66,6 +65,11 @@ public class MolieraScraper extends AbstractScraper {
             }
             url = nextUrl;
         }
+    }
+
+    @Override
+    public void scrapeEntireShop() {
+
     }
 
     private String checkCurrentPrice(String regularPrice, String sellPrice) {

@@ -28,7 +28,6 @@ public class NetAPorterScraper extends AbstractScraper {
     //currency E
 
     @Async
-    @Override
     public void scrapeProducts(Category category) throws IOException {
 //        String url = String.format("https://www.net-a-porter.com/%s", categoryMap.get(category));
         String url = formProperUrlFromCategoryMap(category);
@@ -60,6 +59,11 @@ public class NetAPorterScraper extends AbstractScraper {
                 url = nextUrl;
             }
         }
+    }
+
+    @Override
+    public void scrapeEntireShop() {
+
     }
 
     @Async

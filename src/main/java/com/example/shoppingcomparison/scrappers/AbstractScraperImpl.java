@@ -7,8 +7,12 @@ import com.example.shoppingcomparison.repository.ProductRepository;
 import com.example.shoppingcomparison.repository.ShopRepository;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -19,47 +23,64 @@ import java.util.Objects;
 import java.util.logging.Level;
 import java.util.stream.Stream;
 
+@Service
 public class AbstractScraperImpl extends AbstractScraper {
     Shop shop = shopRepository.save(new Shop("Moliera"));
     private TaskExecutor taskExecutor;
 
-    protected AbstractScraperImpl(ProductRepository productRepository, ShopRepository shopRepository) throws MalformedURLException {
+    protected AbstractScraperImpl(ProductRepository productRepository, ShopRepository shopRepository, @Qualifier("taskExecutor") TaskExecutor taskExecutor) throws MalformedURLException {
         super(productRepository, shopRepository);
         this.homeUrl = new URL("https://www.moliera2.com");
+        this.taskExecutor = taskExecutor;
     }
 
     public void scrapeEntireShop() {
-        taskExecutor.execute(() -> categoryMap.keySet().forEach(this::scrapeByCategory));
+        populateMap();
+        categoryMap.keySet()
+                .forEach(category -> taskExecutor.execute(() -> scrapeByCategory(category)));
     }
 
     @Async
     public void scrapeByCategory(Category category) {
         String categoryBaseUrl = homeUrl + categoryMap.get(category);
+        logger.log(Level.INFO, "Scraping " + category + " from " + shop.getShopName());
         try {
             Document page = Jsoup.connect(categoryBaseUrl).get();
-            page.select("div#product-list div").forEach(element -> {
-                String scrapeModel, scrapeBrand, scrapePrice, scrapeSellPrice, currentPrice, imageSrc, absHref;
-                scrapeModel = element.select("span.ProductItem24__name").text();
-                scrapeBrand = element.select("span.ProductItem24__designer").text();
-                scrapePrice = element.select("span.PriceWithSchema9__value").text();
-                scrapeSellPrice = element.select("div.PriceWithSchema9__value.PriceWithSchema9__value--sale").text();
-                currentPrice = checkCurrentPrice(scrapePrice, scrapeSellPrice);
-                imageSrc = element.select("img[src$=.jpg]").first().attr("src");
-                absHref = element.select("a[href]").first().attr("abs:href");
-
-                if (!fieldIsNullOrEmpty(scrapeModel, scrapeBrand, currentPrice, absHref, imageSrc)) {
-                    saveSingleProduct(scrapeModel, scrapeBrand, formatPrice(currentPrice), absHref, imageSrc, category, shop);
-                }
-            });
-
+            scrapeOnePage(page, category);
         } catch (IOException e) {
-            logger.log(Level.WARNING, "Unable to connect to " + categoryBaseUrl);
+            logger.log(Level.WARNING, "Unable to establish connection with " + categoryBaseUrl);
         }
+    }
+
+    private void scrapeOnePage(Document page, Category category) {
+        Elements elements = page.select("div#product-list div");
+        for (Element element : elements) {
+            String scrapeBrand, scrapeModel, scrapeRegularPrice, scrapeSellPrice, currentPrice;
+            scrapeBrand = element.select("div.product-list-item-feature-designer").text();
+            scrapeModel = element.select("div.product-list-item-name").text();
+            scrapeRegularPrice = element.select("div.product-list-item-regular-price").text();
+            scrapeSellPrice = element.select("div.product-list-item-sell-price").text();
+            currentPrice = checkCurrentPrice(scrapeRegularPrice, scrapeSellPrice);
+            Element image = element.select("img[src$=.jpg]").first();
+            Element link = element.select("a").first();
+
+            if (!fieldIsNullOrEmpty(scrapeModel, scrapeBrand, currentPrice, image, link)) {
+                String imageUrl = image.attr("data-src");
+                String absHref = link.attr("abs:href");
+                BigDecimal price = formatPrice(currentPrice);
+                saveSingleProduct(scrapeModel, scrapeBrand, price, absHref, imageUrl, category, shop);
+            }
+        }
+        scrapeNextPage(page);
+    }
+
+    private void scrapeNextPage(Document page) {
+        String nextUrl = page.select("ul.pagination > li.next > a").attr("abs:href");
+
     }
 
     private void saveSingleProduct(String scrapeModel, String scrapeBrand, BigDecimal price, String
             absHref, String imageUrl, Category category, Shop shop) {
-
         Product product = new Product.Builder()
                 .model(scrapeModel)
                 .brand(scrapeBrand)
@@ -70,11 +91,6 @@ public class AbstractScraperImpl extends AbstractScraper {
                 .shop(shop)
                 .build();
         productRepository.save(product);
-    }
-
-    @Override
-    public void scrapeProducts(Category category) throws IOException {
-
     }
 
     private String checkCurrentPrice(String regularPrice, String sellPrice) {
@@ -92,12 +108,13 @@ public class AbstractScraperImpl extends AbstractScraper {
         return new BigDecimal(currentPriceFormatted);
     }
 
-    public boolean fieldIsNullOrEmpty(String scrapeModel, String scrapeBrand, String currentPrice, String
-            absHref, String imageUrl) {
+    public boolean fieldIsNullOrEmpty(String scrapeModel, String scrapeBrand, String currentPrice, Element
+            absHref, Element imageUrl) {
         return Stream.of(scrapeModel, scrapeBrand, currentPrice, absHref, imageUrl).anyMatch(Objects::isNull) ||
                 Arrays.asList(scrapeModel, scrapeBrand, currentPrice, absHref, imageUrl).contains("");
     }
 
+    @Async
     @Override
     public void populateMap() {
         categoryMap.put(Category.ACCESSORIES, "/1/2/dodatki");
