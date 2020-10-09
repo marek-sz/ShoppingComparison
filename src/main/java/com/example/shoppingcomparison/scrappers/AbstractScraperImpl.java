@@ -18,7 +18,8 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.stream.Stream;
 
@@ -41,38 +42,26 @@ public class AbstractScraperImpl extends AbstractScraper {
 
     @Async
     public void scrapeByCategory(Category category) {
-        String categoryBaseUrl = homeUrl + categoryMap.get(category);
         logger.log(Level.INFO, "Scraping " + category + " from " + shop.getShopName());
-        scrapeOnePage(categoryBaseUrl, category);
+        scrapeAllPages(category);
     }
 
-// without async
-    public List<String> collectAllUrlsForCategory(String categoryBaseUrl) {
-        List<String> urls = new ArrayList<>();
-        String url = categoryBaseUrl;
+    public void scrapeAllPages(Category category) {
+        String url = homeUrl + categoryMap.get(category);
         while (!url.isEmpty()) {
             try {
                 Document page = Jsoup.connect(url).get();
                 String nextUrl = page.select("ul.pagination > li.next > a").attr("abs:href");
+                scrapeOnePage(page, category);
                 url = nextUrl;
-                System.out.println(url);
-                urls.add(nextUrl);
+
             } catch (IOException e) {
-                logger.log(Level.WARNING, "Unable to establish connection with  " + categoryBaseUrl);
+                logger.log(Level.WARNING, "Unable to establish connection with  " + url);
             }
         }
-        return urls;
     }
 
-    private void scrapeOnePage(String categoryBaseUrl, Category category) {
-        String url = categoryBaseUrl;
-        Document page = null;
-        try {
-            page = Jsoup.connect(url).get();
-        } catch (IOException e) {
-            logger.log(Level.WARNING, "Unable to establish connection with  " + categoryBaseUrl);
-        }
-
+    public void scrapeOnePage(Document page, Category category) {
         Elements elements = page.select("div#product-list div");
         for (Element element : elements) {
             String scrapeBrand, scrapeModel, scrapeRegularPrice, scrapeSellPrice, currentPrice;
@@ -93,7 +82,7 @@ public class AbstractScraperImpl extends AbstractScraper {
         }
     }
 
-    private void saveSingleProduct(String scrapeModel, String scrapeBrand, BigDecimal price, String
+    public void saveSingleProduct(String scrapeModel, String scrapeBrand, BigDecimal price, String
             absHref, String imageUrl, Category category, Shop shop) {
         Product product = new Product.Builder()
                 .model(scrapeModel)
@@ -122,7 +111,7 @@ public class AbstractScraperImpl extends AbstractScraper {
         return new BigDecimal(currentPriceFormatted);
     }
 
-    public boolean fieldIsNullOrEmpty(String scrapeModel, String scrapeBrand, String currentPrice, Element
+    private boolean fieldIsNullOrEmpty(String scrapeModel, String scrapeBrand, String currentPrice, Element
             absHref, Element imageUrl) {
         return Stream.of(scrapeModel, scrapeBrand, currentPrice, absHref, imageUrl).anyMatch(Objects::isNull) ||
                 Arrays.asList(scrapeModel, scrapeBrand, currentPrice, absHref, imageUrl).contains("");

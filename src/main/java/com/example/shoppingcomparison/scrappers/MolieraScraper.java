@@ -27,10 +27,15 @@ public class MolieraScraper extends AbstractScraper {
     }
 
     @Async
-    public void scrapeProducts(Category category) throws IOException {
+    public void scrapeProducts(Category category) {
         String url = formProperUrlFromCategoryMap(category);
         while (!url.isEmpty() || url != null) {
-            Document page = Jsoup.connect(url).get();
+            Document page = null;
+            try {
+                page = Jsoup.connect(url).get();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             String nextUrl = page.select("ul.pagination > li.next > a").attr("abs:href");
 
             for (Element row : page.select("div#product-list div")) {
@@ -69,7 +74,9 @@ public class MolieraScraper extends AbstractScraper {
 
     @Override
     public void scrapeEntireShop() {
-
+        populateMap();
+        categoryMap.keySet()
+                .forEach(this::scrapeProducts);
     }
 
     private String checkCurrentPrice(String regularPrice, String sellPrice) {
