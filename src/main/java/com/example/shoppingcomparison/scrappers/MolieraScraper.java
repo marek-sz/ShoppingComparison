@@ -1,14 +1,15 @@
 package com.example.shoppingcomparison.scrappers;
 
 import com.example.shoppingcomparison.model.Category;
-import com.example.shoppingcomparison.model.Product;
 import com.example.shoppingcomparison.model.Shop;
 import com.example.shoppingcomparison.repository.ProductRepository;
 import com.example.shoppingcomparison.repository.ShopRepository;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.springframework.scheduling.annotation.Async;
+import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.task.TaskExecutor;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -21,62 +22,46 @@ import java.util.logging.Level;
 public class MolieraScraper extends AbstractScraper {
     Shop shop = shopRepository.save(new Shop("Moliera"));
 
-    protected MolieraScraper(ProductRepository productRepository, ShopRepository shopRepository) throws MalformedURLException {
-        super(productRepository, shopRepository);
+    protected MolieraScraper(ProductRepository productRepository, ShopRepository shopRepository,
+                             @Qualifier("taskExecutor") TaskExecutor taskExecutor) throws MalformedURLException {
+        super(productRepository, shopRepository, taskExecutor);
         this.homeUrl = new URL("https://www.moliera2.com");
     }
 
-    @Async
-    public void scrapeProducts(Category category) {
-        String url = formProperUrlFromCategoryMap(category);
-        while (!url.isEmpty() || url != null) {
-            Document page = null;
+    public void scrapeAllPages(Category category) {
+        String url = homeUrl + categoryMap.get(category);
+        while (!url.isEmpty()) {
             try {
-                page = Jsoup.connect(url).get();
+                Document page = Jsoup.connect(url).get();
+                String nextUrl = page.select("ul.pagination > li.next > a").attr("abs:href");
+                scrapeOnePage(page, category);
+                url = nextUrl;
+
             } catch (IOException e) {
-                e.printStackTrace();
+                logger.log(Level.WARNING, "Unable to establish connection with  " + url);
             }
-            String nextUrl = page.select("ul.pagination > li.next > a").attr("abs:href");
-
-            for (Element row : page.select("div#product-list div")) {
-                String scrapeBrand, scrapeModel, scrapeRegularPrice, scrapeSellPrice, currentPrice;
-                scrapeBrand = row.select("div.product-list-item-feature-designer").text();
-                scrapeModel = row.select("div.product-list-item-name").text();
-                scrapeRegularPrice = row.select("div.product-list-item-regular-price").text();
-                scrapeSellPrice = row.select("div.product-list-item-sell-price").text();
-                currentPrice = checkCurrentPrice(scrapeRegularPrice, scrapeSellPrice);
-                Element image = row.select("img[src$=.jpg]").first();
-                Element link = row.select("a").first();
-
-                if (scrapeBrand.equals("") || scrapeModel.equals("") || currentPrice == null || link == null || image == null) {
-                    continue;
-                } else {
-                    String absHref = link.attr("abs:href");
-                    String imageUrl = image.attr("data-src");
-                    BigDecimal price = formatPrice(currentPrice);
-
-                    Product product = new Product.Builder()
-                            .model(scrapeModel)
-                            .brand(scrapeBrand)
-                            .price(price)
-                            .url(absHref)
-                            .imageUrl(imageUrl)
-                            .category(category)
-                            .shop(shop)
-                            .build();
-
-                    productRepository.save(product);
-                }
-            }
-            url = nextUrl;
         }
     }
 
-    @Override
-    public void scrapeEntireShop() {
-        populateMap();
-        categoryMap.keySet()
-                .forEach(this::scrapeProducts);
+    public void scrapeOnePage(Document page, Category category) {
+        Elements elements = page.select("div#product-list div");
+        for (Element element : elements) {
+            String scrapeBrand, scrapeModel, scrapeRegularPrice, scrapeSellPrice, currentPrice;
+            scrapeBrand = element.select("div.product-list-item-feature-designer").text();
+            scrapeModel = element.select("div.product-list-item-name").text();
+            scrapeRegularPrice = element.select("div.product-list-item-regular-price").text();
+            scrapeSellPrice = element.select("div.product-list-item-sell-price").text();
+            currentPrice = checkCurrentPrice(scrapeRegularPrice, scrapeSellPrice);
+            Element image = element.select("img[src$=.jpg]").first();
+            Element link = element.select("a").first();
+
+            if (!fieldIsNullOrEmpty(scrapeModel, scrapeBrand, currentPrice, image, link)) {
+                String imageUrl = image.attr("data-src");
+                String absHref = link.attr("abs:href");
+                BigDecimal price = formatPrice(currentPrice);
+                saveSingleProduct(scrapeModel, scrapeBrand, price, absHref, imageUrl, category, shop);
+            }
+        }
     }
 
     private String checkCurrentPrice(String regularPrice, String sellPrice) {
@@ -92,17 +77,6 @@ public class MolieraScraper extends AbstractScraper {
     private BigDecimal formatPrice(String currentPrice) {
         String currentPriceFormatted = currentPrice.substring(0, currentPrice.indexOf('z')).replaceAll("\\s+", "");
         return new BigDecimal(currentPriceFormatted);
-    }
-
-    public String formProperUrlFromCategoryMap(Category category) {
-        String url = null;
-        try {
-            url = new URL(homeUrl, categoryMap.get(category)).toString();
-            logger.log(Level.INFO, "Scraping " + category + " from " + shop.getShopName());
-        } catch (IOException e) {
-            logger.log(Level.WARNING, "Category " + category + " is not defined for " + this.getClass().getSimpleName());
-        }
-        return url;
     }
 
     public void populateMap() {
