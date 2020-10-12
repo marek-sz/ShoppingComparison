@@ -23,7 +23,7 @@ public class ProductController {
         this.productRepository = productRepository;
     }
 
-    @GetMapping("/index")
+    @GetMapping
     public String populateLandingPageWithRandomProducts(Model model) {
         List<Product> products = productRepository.findAllById(generateRandomIds());
         model.addAttribute("products", products);
@@ -31,7 +31,7 @@ public class ProductController {
     }
 
     private List<Long> generateRandomIds() {
-        long[] longs = ThreadLocalRandom.current().longs(100, 1, productRepository.count()).toArray();
+        long[] longs = ThreadLocalRandom.current().longs(10, 1, productRepository.count()).toArray();
         return Arrays.stream(longs)
                 .boxed()
                 .collect(Collectors.toList());

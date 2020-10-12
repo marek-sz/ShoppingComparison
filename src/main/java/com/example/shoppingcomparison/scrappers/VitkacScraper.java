@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.logging.Level;
@@ -30,20 +29,33 @@ public class VitkacScraper extends AbstractScraper {
         this.homeUrl = new URL("https://www.vitkac.com");
     }
 
-    @Override
     public void scrapeAllPages(Category category) {
         String url = homeUrl + categoryMap.get(category);
-        String nextUrl = null;
-        while (!url.isEmpty()) {
+        String nextUrl;
+
+        while (true) {
             try {
                 Document page = Jsoup.connect(url).get();
                 scrapeOnePage(page, category);
-                nextUrl = page.select("span#offsets_top.dropdown.na-stronie > a.small").last().attr("abs:href");
+                nextUrl = searchForNextUrl(page);
+                if (nextUrl == null || nextUrl.equals(url)) {
+                    break;
+                }
+                url = nextUrl;
             } catch (IOException e) {
                 logger.log(Level.WARNING, "Unable to establish connection with  " + url);
             }
-            url = nextUrl;
         }
+    }
+
+    private String searchForNextUrl(Document page) {
+        String nextUrl = null;
+        try {
+            nextUrl = page.select("span#offsets_top.dropdown.na-stronie > a.small").last().attr("abs:href");
+        } catch (NullPointerException e) {
+            logger.log(Level.WARNING, "End of pagination");
+        }
+        return nextUrl;
     }
 
     @Async
