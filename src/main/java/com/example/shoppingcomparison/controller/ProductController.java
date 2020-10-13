@@ -85,4 +85,9 @@ public class ProductController {
         model.addAttribute("products", products);
         return "index";
     }
+
+    @GetMapping("/login")
+    public String getLogin() {
+        return "login";
+    }
 }

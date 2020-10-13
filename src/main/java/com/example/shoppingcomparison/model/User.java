@@ -1,7 +1,5 @@
 package com.example.shoppingcomparison.model;
 
-import com.example.shoppingcomparison.security.UserRole;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
