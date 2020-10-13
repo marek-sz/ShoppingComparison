@@ -84,8 +84,14 @@
                         </thead>
                         <tbody>
                         <tr th:each="product: ${products}">
-                            <td><img th:src="@{${product.imageUrl}}" alt="static/img/photo_unavailble.jpg"
-                                     height="100px"/></td>
+                            <td>
+                                <div class="image-container">
+                                    <img th:src="@{${product.imageUrl}}" alt="static/img/photo_unavailble.jpg"
+                                         height="120px"/>
+                                    <a class="overlay" title="Add to favorites" th:href="@{/addToFavorites}"> <i
+                                            class="icon-heart-empty"> </i> </a>
+                                </div>
+                            </td>
                             <td th:text="${product.brand + ' ' + product.model}"></td>
                             <td th:text="${product.price}" th:href="${product.url}"></td>
                             <td><a href="#" target="_blank" th:href="${product.url}">Do sklepu</a></td>

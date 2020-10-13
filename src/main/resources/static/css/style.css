@@ -76,6 +76,23 @@ th {
     font-weight: normal;
 }
 
+.image-container {
+    position: relative;
+}
+
+.overlay {
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    transition: all 0.5s ease-in-out;
+}
+
+.image-container:hover .overlay {
+    opacity: 1;
+}
+
+
 .socials {
     margin-right: auto;
     margin-left: auto;
