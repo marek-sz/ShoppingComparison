@@ -1,0 +1,42 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Create your account</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
+</head>
+<body>
+<div class="container">
+    <form class="form-signin" method="post" action="/registration">
+        <h2 class="text-center">Create your account</h2>
+        <p>
+            <label for="userName" class="sr-only">Username</label>
+            <input type="text" id="userName" name="userName" class="form-control"
+                   placeholder="Username" required=""
+                   autofocus="">
+        </p>
+        <p>
+            <label for="password" class="sr-only">Password</label>
+            <input type="password" id="password" name="password" class="form-control"
+                   placeholder="Password"
+                   required="">
+        </p>
+        <p>
+            <label for="passwordConfirm" class="sr-only">Password</label>
+            <input type="password" id="passwordConfirm" name="password" class="form-control"
+                   placeholder="Confirm your password"
+                   required="">
+        </p>
+        <button class="btn-outline-dark btn-sign-in btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+        <h4 class="text-center my-1"><a href="/login">Already have an account?</a></h4>
+    </form>
+</div>
+</body>
+</html>

@@ -1,10 +1,14 @@
 package com.example.shoppingcomparison.auth;
 
+import com.example.shoppingcomparison.model.User;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ApplicationUser implements UserDetails {
     private List<GrantedAuthority> grantedAuthorities;
@@ -14,6 +18,18 @@ public class ApplicationUser implements UserDetails {
     private boolean isAccountNonLocked;
     private boolean isCredentialsNonExpired;
     private boolean isEnabled;
+
+    public ApplicationUser(User user) {
+        this.grantedAuthorities = Arrays.stream(user.getRoles().split(","))
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toList());
+        this.username = user.getUserName();
+        this.password = user.getPassword();
+        this.isAccountNonExpired = true;
+        this.isAccountNonLocked = true;
+        this.isCredentialsNonExpired = true;
+        this.isEnabled = true;
+    }
 
     public ApplicationUser(List<GrantedAuthority> grantedAuthorities,
                            String username,

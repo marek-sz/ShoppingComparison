@@ -15,23 +15,12 @@ public class RunAtStart {
     private List<Scraper> scrapers;
 
     @Autowired
-    public RunAtStart(List<Scraper> scrapers, PasswordEncoder passwordEncoder) {
+    public RunAtStart(List<Scraper> scrapers) {
         this.scrapers = scrapers;
-        this.passwordEncoder = passwordEncoder;
     }
 
-    @Autowired
-    UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
     @PostConstruct
     public void runAtStart() {
-        User user = new User();
-        user.setUserName("admin");
-        user.setPassword(passwordEncoder.encode("pass"));
-        user.setActive(true);
-        user.setRoles("ROLE_ADMIN");
-        userRepository.save(user);
-
         scrapers.forEach(Scraper::scrapeEntireShop);
     }
 }

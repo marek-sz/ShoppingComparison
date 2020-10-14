@@ -1,6 +1,5 @@
 package com.example.shoppingcomparison.security;
 
-import com.example.shoppingcomparison.auth.ApplicationUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
@@ -19,12 +18,10 @@ import static com.example.shoppingcomparison.security.UserRole.ADMIN;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
-    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public SecurityConfig(@Qualifier("applicationUserService") UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
+    public SecurityConfig(@Qualifier("applicationUserService") UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
-        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -34,15 +31,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/", "/index", "/allProducts", "/products").permitAll()
-                .antMatchers("/console", "/console/**").hasRole(ADMIN.name())
+//for H2
+        http.headers().frameOptions().disable();
+        http.csrf().disable();
+
+        http.authorizeRequests()
+                .antMatchers("/", "/index", "/allProducts", "/products", "/registration").permitAll()
+//                .antMatchers("/console", "/console/**").hasRole(ADMIN.name())
+                .antMatchers("/console", "/console/**").permitAll()
                 .anyRequest().permitAll()
                 .and()
-                .formLogin().permitAll();
-//                .loginPage("/login").permitAll(); //TODO: style custom login page
+                .formLogin().loginPage("/login").permitAll()
+                .and()
+                .logout().permitAll();
     }
 
     @Override

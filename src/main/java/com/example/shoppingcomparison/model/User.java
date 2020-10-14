@@ -1,9 +1,6 @@
 package com.example.shoppingcomparison.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class User {
@@ -14,6 +11,9 @@ public class User {
     private String password;
     private boolean active;
     private String roles;
+
+    @Transient
+    private String passwordConfirm;
 
     public long getId() {
         return id;
@@ -53,5 +53,13 @@ public class User {
 
     public void setRoles(String roles) {
         this.roles = roles;
+    }
+
+    public String getPasswordConfirm() {
+        return passwordConfirm;
+    }
+
+    public void setPasswordConfirm(String passwordConfirm) {
+        this.passwordConfirm = passwordConfirm;
     }
 }
