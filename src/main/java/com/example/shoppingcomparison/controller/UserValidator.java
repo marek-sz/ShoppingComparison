@@ -31,17 +31,18 @@ public class UserValidator implements Validator {
             errors.rejectValue("userName", "Size.userForm.userName");
         }
 
-        if (applicationUserService.loadUserByUsername(user.getUserName()) != null) {
-            errors.rejectValue("userName", "Duplicate.userForm.userName");
-        }
+        //cannot be null cuz loadUserByUsername returns Optional
+//        if (applicationUserService.loadUserByUsername(user.getUserName()) != null) {
+//            errors.rejectValue("userName", "Duplicate.userForm.userName");
+//        }
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty");
-        if (user.getPassword().length() < 8 || user.getPassword().length() > 32) {
-            errors.rejectValue("password", "Size.userForm.password");
-        }
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty");
+//        if (user.getPassword().length() < 8 || user.getPassword().length() > 32) {
+//            errors.rejectValue("password", "Size.userForm.password");
+//        }
 
-        if (!user.getPasswordConfirm().equals(user.getPassword())) {
-            errors.rejectValue("passwordConfirm", "Diff.userForm.passwordConfirm");
-        }
+//        if (!user.getPasswordConfirm().equals(user.getPassword())) {
+//            errors.rejectValue("passwordConfirm", "Diff.userForm.passwordConfirm");
+//        }
     }
 }

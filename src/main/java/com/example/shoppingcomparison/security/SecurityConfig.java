@@ -9,9 +9,8 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
-import static com.example.shoppingcomparison.security.UserRole.ADMIN;
+import static com.example.shoppingcomparison.security.UserRole.USER;
 
 @Configuration
 @EnableWebSecurity
@@ -37,8 +36,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers("/", "/index", "/allProducts", "/products", "/registration").permitAll()
-//                .antMatchers("/console", "/console/**").hasRole(ADMIN.name())
-                .antMatchers("/console", "/console/**").permitAll()
+                .antMatchers("/addToFavorites").hasRole(USER.name())
+//                .antMatchers("/console").hasRole(ADMIN.name())
                 .anyRequest().permitAll()
                 .and()
                 .formLogin().loginPage("/login").permitAll()

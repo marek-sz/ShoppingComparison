@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class UserController {
@@ -24,6 +25,14 @@ public class UserController {
     @GetMapping("/login")
     public String login() {
         return "login";
+    }
+
+    @PostMapping("/login")
+    public String signIn(
+            @RequestParam("username") String username,
+            @RequestParam("password") String password) {
+        applicationUserService.validatePassword(username, password);
+        return "index";
     }
 
     @GetMapping("/registration")
@@ -43,5 +52,11 @@ public class UserController {
 
         applicationUserService.save(userForm);
         return "redirect:/";
+    }
+
+    //todo: implement this
+    @GetMapping("/addToFavorites")
+    public String addToFavorites() {
+        return "index";
     }
 }

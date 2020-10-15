@@ -30,8 +30,14 @@ public class ApplicationUserService implements UserDetailsService {
         return user.map(ApplicationUser::new).get();
     }
 
+    public boolean validatePassword(String username, String password) {
+        return userRepository.findByUserName(username).get().getPassword().equals(passwordEncoder.encode(password));
+    }
+
     public void save(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setActive(true);
+        user.setRoles(UserRole.USER.name());
         userRepository.save(user);
     }
 }
