@@ -9,40 +9,40 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-
-import static com.example.shoppingcomparison.security.UserRole.USER;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final UserDetailsService userDetailsService;
+    private UserDetailsService userDetailsService;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public SecurityConfig(@Qualifier("applicationUserService") UserDetailsService userDetailsService) {
+    public SecurityConfig(@Qualifier("applicationUserService") UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
         this.userDetailsService = userDetailsService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService);
+        auth
+                .userDetailsService(userDetailsService)
+                .passwordEncoder(passwordEncoder);
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 //for H2
-        http.headers().frameOptions().disable();
         http.csrf().disable();
+        http.headers().frameOptions().disable();
 
         http.authorizeRequests()
-                .antMatchers("/", "/index", "/allProducts", "/products", "/registration").permitAll()
-                .antMatchers("/addToFavorites").hasRole(USER.name())
-//                .antMatchers("/console").hasRole(ADMIN.name())
-                .anyRequest().permitAll()
+                .antMatchers("/addToFavorites").hasRole("USER")
                 .and()
-                .formLogin().loginPage("/login").permitAll()
-                .and()
-                .logout().permitAll();
+                .formLogin()
+//                .loginPage("/login")
+                .defaultSuccessUrl("/");
     }
 
     @Override

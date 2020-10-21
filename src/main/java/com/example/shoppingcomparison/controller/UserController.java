@@ -1,25 +1,21 @@
 package com.example.shoppingcomparison.controller;
 
+import com.example.shoppingcomparison.auth.ApplicationUserDetails;
 import com.example.shoppingcomparison.auth.ApplicationUserService;
-import com.example.shoppingcomparison.model.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class UserController {
-    private final UserValidator userValidator;
     private final ApplicationUserService applicationUserService;
+    private final UserValidator userValidator;
 
-    @Autowired
-    public UserController(UserValidator userValidator, ApplicationUserService applicationUserService) {
-        this.userValidator = userValidator;
+    public UserController(ApplicationUserService applicationUserService, UserValidator userValidator) {
         this.applicationUserService = applicationUserService;
+        this.userValidator = userValidator;
     }
 
     @GetMapping("/login")
@@ -27,30 +23,29 @@ public class UserController {
         return "login";
     }
 
-    @PostMapping("/login")
-    public String signIn(
-            @RequestParam("username") String username,
-            @RequestParam("password") String password) {
-        applicationUserService.validatePassword(username, password);
-        return "index";
-    }
-
     @GetMapping("/registration")
     public String registration(Model model) {
-        model.addAttribute("userForm", new User());
+        model.addAttribute("userForm", new ApplicationUserDetails());
         return "registration";
     }
 
+//    @PostMapping("/registration")
+//    public String registration(@ModelAttribute("userForm") ApplicationUserDetails userForm,
+//                               BindingResult bindingResult) {
+//        userValidator.validate(userForm, bindingResult);
+//
+//        if (bindingResult.hasErrors()) {
+//            return "registration";
+//        }
+//
+//        applicationUserService.addUser(userForm);
+//        return "redirect:/";
+//    }
+
     @PostMapping("/registration")
-    public String registration(@ModelAttribute("userForm") User userForm,
-                               BindingResult bindingResult) {
-        userValidator.validate(userForm, bindingResult);
-
-        if (bindingResult.hasErrors()) {
-            return "registration";
-        }
-
-        applicationUserService.save(userForm);
+    public String submit(@ModelAttribute ApplicationUserDetails userForm, Model model) {
+        model.addAttribute("userForm", userForm);
+        applicationUserService.addUser(userForm);
         return "redirect:/";
     }
 

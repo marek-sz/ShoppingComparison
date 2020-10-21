@@ -1,43 +1,45 @@
 package com.example.shoppingcomparison.auth;
 
-import com.example.shoppingcomparison.model.User;
-import com.example.shoppingcomparison.repository.UserRepository;
-import com.example.shoppingcomparison.security.UserRole;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
+import com.example.shoppingcomparison.repository.ApplicationUserRepository;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class ApplicationUserService implements UserDetailsService {
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
 
-    @Autowired
-    public ApplicationUserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
+    ApplicationUserRepository applicationUserRepository;
+    PasswordEncoder passwordEncoder;
+
+    public ApplicationUserService(ApplicationUserRepository applicationUserRepository, PasswordEncoder passwordEncoder) {
+        this.applicationUserRepository = applicationUserRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
     @Override
-    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        Optional<User> user = userRepository.findByUserName(userName);
-        user.orElseThrow(() -> new UsernameNotFoundException("User %s not found " + userName));
-        return user.map(ApplicationUser::new).get();
+    public ApplicationUserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        ApplicationUserDetails applicationUserDetails =
+                applicationUserRepository.findApplicationUserDetailsByUsername(username);
+        if (applicationUserDetails == null) {
+            throw new UsernameNotFoundException("User %s not found " + username);
+        }
+        return applicationUserDetails;
+
+//        User user = userRepository.findByUserName(username);
+//        Optional<User> user = userRepository.findByUserName(username);
+//        user.orElseThrow(() -> new UsernameNotFoundException("User %s not found " + username));
+//        return user.map(ApplicationUser::new).get();
+//        return new ApplicationUser(user);
     }
 
-    public boolean validatePassword(String username, String password) {
-        return userRepository.findByUserName(username).get().getPassword().equals(passwordEncoder.encode(password));
-    }
-
-    public void save(User user) {
+    public void addUser(ApplicationUserDetails user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setActive(true);
-        user.setRoles(UserRole.USER.name());
-        userRepository.save(user);
+        user.setRole("ROLE_USER");
+        user.setAccountNonExpired(true);
+        user.setAccountNonLocked(true);
+        user.setCredentialsNonExpired(true);
+        user.setEnabled(true);
+        applicationUserRepository.save(user);
     }
 }

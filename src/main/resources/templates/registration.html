@@ -14,23 +14,24 @@
 </head>
 <body>
 <div class="container">
-    <form class="form-signin" modelAttribute="userForm" method="post" action="/registration">
+
+    <form th:action="@{/registration}" class="form-signin" method="post" th:object="${userForm}">
         <h2 class="text-center">Create your account</h2>
         <p>
             <label for="userName" class="sr-only">Username</label>
-            <input type="text" id="userName" name="userName" class="form-control"
+            <input type="text" id="userName" th:field="*{username}" class="form-control"
                    placeholder="Username" required=""
                    autofocus="">
         </p>
         <p>
             <label for="password" class="sr-only">Password</label>
-            <input type="password" id="password" name="password" class="form-control"
+            <input type="password" id="password" th:field="*{password}" class="form-control"
                    placeholder="Password"
                    required="">
         </p>
         <p>
             <label for="passwordConfirm" class="sr-only">Password</label>
-            <input type="password" id="passwordConfirm" name="password" class="form-control"
+            <input type="password" id="passwordConfirm" th:field="*{passwordConfirm}" class="form-control"
                    placeholder="Confirm your password"
                    required="">
         </p>
