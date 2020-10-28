@@ -5,6 +5,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -13,8 +16,15 @@ public class ApplicationUserDetails implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank
+    @Size(min = 4, max = 32, message = "Name must be between 4 and 32 characters")
     private String username;
+
+    @NotBlank
+    @Size(min = 6, message = "Password must be at least 6 characters")
     private String password;
+
     private String role;
     private boolean isAccountNonExpired;
     private boolean isAccountNonLocked;

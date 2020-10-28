@@ -1,5 +1,7 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="pl">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -24,9 +26,23 @@
     <nav class="navbar navbar-light bg-light">
         <form action="/products" method="GET" class="form-inline">
             <a class="navbar-brand" href="/"><h1>Lorem</h1></a>
-            <input class="search-box form-control mr-2" type="search" name="productName" placeholder="Szukaj" aria-label="Search">
+            <input class="search-box form-control mr-2" type="search" name="productName" placeholder="Szukaj"
+                   aria-label="Search">
             <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Szukaj</button>
         </form>
+        <div class="navbar-form navbar-right">
+            <div sec:authorize="isAnonymous()">
+                <a class="btn btn-outline-dark my-2 my-sm-0" th:href="@{/login}">Zaloguj się</a>
+                <a class="btn btn-outline-dark my-2 my-sm-0" th:href="@{/registration}">Zarejestruj się</a>
+            </div>
+            <div sec:authorize="isAuthenticated()">
+                <a class="btn btn-outline-dark my-2 my-sm-0" th:href="@{/logout}">Wyloguj się</a>
+            </div>
+            <div sec:authorize="hasRole('ROLE_USER')">
+                <a class="btn btn-outline-dark my-2 my-sm-0" th:href="@{/logout}">Wyloguj się</a>
+            </div>
+
+        </div>
     </nav>
 </header>
 

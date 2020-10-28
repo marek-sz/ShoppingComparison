@@ -33,7 +33,6 @@ public abstract class AbstractScraper implements Scraper {
         this.productRepository = productRepository;
         this.shopRepository = shopRepository;
         this.taskExecutor = taskExecutor;
-
     }
 
     public void scrapeEntireShop() {

@@ -25,12 +25,6 @@ public class ApplicationUserService implements UserDetailsService {
             throw new UsernameNotFoundException("User %s not found " + username);
         }
         return applicationUserDetails;
-
-//        User user = userRepository.findByUserName(username);
-//        Optional<User> user = userRepository.findByUserName(username);
-//        user.orElseThrow(() -> new UsernameNotFoundException("User %s not found " + username));
-//        return user.map(ApplicationUser::new).get();
-//        return new ApplicationUser(user);
     }
 
     public void addUser(ApplicationUserDetails user) {

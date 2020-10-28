@@ -14,12 +14,19 @@
 </head>
 <body>
 <div class="container">
-    <form class="form-signin" method="POST" action="/login">
+    <form th:action="@{/login}"
+          method="POST"
+          class="form-signin">
         <h2 class="text-center">Please sign in</h2>
-        <p>
-            <label for="username" class="sr-only">Username</label>
-            <input type="text" id="username" name="username" class="form-control" placeholder="Username"
-                   required="" autofocus="">
+        <p th:if="${param.error}" class="alert alert-danger">
+            Invalid username or password.
+        </p>
+        <p th:if="${param.logout}" class="alert alert-info">
+            You have been logged out.
+        </p>
+        <label for="username" class="sr-only">Username</label>
+        <input type="text" id="username" name="username" class="form-control" placeholder="Username"
+               required="" autofocus="">
         </p>
         <p>
             <label for="password" class="sr-only">Password</label>

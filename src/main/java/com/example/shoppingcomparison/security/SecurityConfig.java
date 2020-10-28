@@ -33,7 +33,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//for H2
         http.csrf().disable();
         http.headers().frameOptions().disable();
 
@@ -41,8 +40,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/addToFavorites").hasRole("USER")
                 .and()
                 .formLogin()
-//                .loginPage("/login")
-                .defaultSuccessUrl("/");
+                .loginPage("/login")
+                .defaultSuccessUrl("/")
+                .and().logout().permitAll();
     }
 
     @Override
