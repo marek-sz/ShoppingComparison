@@ -11,6 +11,7 @@ import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -19,7 +20,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.logging.Level;
 
-@Service
+@Component
 public class NetAPorterScraper extends AbstractScraper {
     Shop shop = shopRepository.save(new Shop("Net A Porter"));
 

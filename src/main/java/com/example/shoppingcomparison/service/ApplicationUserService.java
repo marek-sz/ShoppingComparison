@@ -1,5 +1,6 @@
-package com.example.shoppingcomparison.auth;
+package com.example.shoppingcomparison.service;
 
+import com.example.shoppingcomparison.auth.ApplicationUserDetails;
 import com.example.shoppingcomparison.repository.ApplicationUserRepository;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -8,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ApplicationUserService implements UserDetailsService {
-
     ApplicationUserRepository applicationUserRepository;
     PasswordEncoder passwordEncoder;
 

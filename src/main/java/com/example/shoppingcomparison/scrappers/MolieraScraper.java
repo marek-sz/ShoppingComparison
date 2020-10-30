@@ -9,7 +9,9 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
 import org.springframework.core.task.TaskExecutor;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -18,7 +20,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.logging.Level;
 
-@Service
+@Component
 public class MolieraScraper extends AbstractScraper {
     Shop shop = shopRepository.save(new Shop("Moliera"));
 

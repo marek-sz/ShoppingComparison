@@ -1,6 +1,6 @@
 package com.example.shoppingcomparison.controller;
 
-import com.example.shoppingcomparison.repository.ProductRepository;
+import com.example.shoppingcomparison.service.ProductService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MockMvc;
@@ -10,16 +10,16 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 class ProductControllerTest {
-    private final ProductRepository productRepository;
+    private final ProductService productService;
 
     @Autowired
-    public ProductControllerTest(ProductRepository productRepository) {
-        this.productRepository = productRepository;
+    public ProductControllerTest(ProductService productService) {
+        this.productService = productService;
     }
 
     @Test
     public void testProductController() throws Exception {
-        ProductController productController = new ProductController(productRepository);
+        ProductController productController = new ProductController(productService);
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(productController).build();
         mockMvc.perform(get("/allProducts")).andExpect(view().name("index.html"));
     }

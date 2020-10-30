@@ -1,7 +1,7 @@
 package com.example.shoppingcomparison.controller;
 
 import com.example.shoppingcomparison.auth.ApplicationUserDetails;
-import com.example.shoppingcomparison.auth.ApplicationUserService;
+import com.example.shoppingcomparison.service.ApplicationUserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
