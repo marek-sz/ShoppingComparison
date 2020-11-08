@@ -1,11 +1,17 @@
 package com.example.shoppingcomparison.controller;
 
 import com.example.shoppingcomparison.auth.ApplicationUserDetails;
+import com.example.shoppingcomparison.exception.UserAlreadyInDatabaseException;
 import com.example.shoppingcomparison.service.ApplicationUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 @Component
 public class UserValidator implements Validator {
@@ -25,12 +31,12 @@ public class UserValidator implements Validator {
     public void validate(Object o, Errors errors) {
         ApplicationUserDetails user = (ApplicationUserDetails) o;
 
-//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "NotEmpty");
-//        if (user.getUsername().length() < 6 || user.getUsername().length() > 32) {
-//            errors.rejectValue("username", "Size.userForm.username", "Error from Validator");
-//        }
-
-//        if (applicationUserService.loadUserByUsername(user.getUserName()) != null) {
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "NotEmpty");
+        if (user.getUsername().length() < 6 || user.getUsername().length() > 32) {
+            errors.rejectValue("username", "{Size.userForm.username}","{Size.userForm.username}");
+        }
+//
+//        if (applicationUserService.loadUserByUsername(user.getUsername()) != null) {
 //            errors.rejectValue("userName", "Duplicate.userForm.userName");
 //        }
 
@@ -43,4 +49,22 @@ public class UserValidator implements Validator {
 //            errors.rejectValue("passwordConfirm", "Diff.userForm.passwordConfirm");
 //        }
     }
+
+    // TODO: 2020-10-30  org.springframework.validation.DefaultMessageCodesResolver ??
+    
+    @Bean
+    public MessageSource messageSource() {
+        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+        messageSource.setBasename("classpath:messages");
+        messageSource.setDefaultEncoding("UTF-8");
+        return messageSource;
+    }
+
+    @Bean
+    public LocalValidatorFactoryBean validator(MessageSource messageSource) {
+        LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
+        bean.setValidationMessageSource(messageSource);
+        return bean;
+    }
+
 }

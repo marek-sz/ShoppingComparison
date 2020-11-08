@@ -49,6 +49,7 @@ public class VitkacScraper extends AbstractScraper {
         }
     }
 
+    // TODO: 2020-10-30 throw exception or use Optional
     private String searchForNextUrl(Document page) {
         String nextUrl = null;
         try {

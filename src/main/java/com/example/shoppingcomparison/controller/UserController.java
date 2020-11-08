@@ -38,7 +38,7 @@ public class UserController {
                          BindingResult bindingResult,
                          Model model) {
         model.addAttribute("userForm", userForm);
-//        userValidator.validate(userForm, bindingResult);
+        userValidator.validate(userForm, bindingResult);
 
         if (bindingResult.hasErrors()) {
             return "registration";

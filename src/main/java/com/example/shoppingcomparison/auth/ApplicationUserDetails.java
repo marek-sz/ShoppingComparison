@@ -18,11 +18,11 @@ public class ApplicationUserDetails implements UserDetails {
     private Long id;
 
     @NotBlank
-    @Size(min = 4, max = 32, message = "Name must be between 4 and 32 characters")
+    @Size(min = 4, max = 32, message = "{Size.userForm.username}")
     private String username;
 
     @NotBlank
-    @Size(min = 6, message = "Password must be at least 6 characters")
+//    @Size(min = 6, message = "Password must be at least 6 characters")
     private String password;
 
     private String role;
